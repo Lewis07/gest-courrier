@@ -1,0 +1,61 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Direction{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Directions</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Direction</li>
+                            </ol>
+                        </div><!--end col-->
+                        <div class="col-auto align-self-center">
+                            <a href="{{ path('direction_new') }}" class="btn btn-primary float-right mb-3">
+                                <i class="fa fa-plus"></i>
+                                Nouvel direction
+                            </a>
+                        </div>
+                    </div><!--end row-->
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for direction in directions %}
+                        <tr>
+                            <td>{{ direction.nomDirection }}</td>
+                            <td>{{ direction.descrDir }}</td>
+                            <td>
+                                <a href="{{ path('direction_edit',{id:direction.id})}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ path('direction_delete',{id:direction.id})}}"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

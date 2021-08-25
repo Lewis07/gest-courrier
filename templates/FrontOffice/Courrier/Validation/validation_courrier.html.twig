@@ -1,0 +1,78 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Validation de courrier{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Courrier</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Validation</li>
+                            </ol>
+                        </div><!--end col-->
+                        <div class="col-auto align-self-center">
+                            <a href="{{ path('mail_validation_request') }}" class="btn btn-primary float-right mb-3">
+                                <i class="fa fa-plus"></i>
+                                Demander une validation
+                            </a>
+                        </div>
+                    </div><!--end row-->
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Recepteur</th>
+                        <th>Objet</th>
+                        <th>Validé</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for validation_courrier in validation_courriers %}
+                        <tr>
+                            <td>{{ validation_courrier.recipient.email }}</td>
+                            <td class="{{ validation_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
+                                {{ validation_courrier.objetCourrier }}
+                            </td>
+                            <td>
+                                <span class="badge badge-{{ validation_courrier.isValid == 1 ? "success" : "danger" }}">
+                                    {{ validation_courrier.isValid == 1 ? "Oui" : "Non" }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ path('valide_request',{id:validation_courrier.id}) }}"
+                                   class="btn btn-sm bg-blue-darken text-white {{ validation_courrier.isValid == 1 ? "" : "d-none" }}">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                <a href="{{ path('courrier_request_show',{id:validation_courrier.id})}}"
+                                   class="btn btn-sm btn-dark">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ path('courrier_delete_trash',{id:validation_courrier.id})}}"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer ce validation');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr align="center">
+                            <td colspan="3">
+                                Aucun courrier à valider
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

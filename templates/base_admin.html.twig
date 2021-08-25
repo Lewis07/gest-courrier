@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %} Mi-fandefa | {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ asset('assets/images/omnis/logo.png') }}">
+        {% block stylesheets %}
+            <!-- App css -->
+            <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/icons.min.css') }}" type="text/css" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/metisMenu.min.css') }}" type="text/css" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}" type="text/css" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/vendor/animate/animate.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/vendor/css-hamburgers/hamburgers.min.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/vendor/animsition/css/animsition.min.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/vendor/select2/select2.min.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/vendor/daterangepicker/daterangepicker.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/css/util.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bootstrap/login/css/main.css') }}">
+        {% endblock %}
+    </head>
+    <body class="dark-sidenav">
+        {% include 'partials/sidebar.html.twig' %}
+{#{% include 'partials/header.html.twig' %}#}
+        <!-- page-wrapper -->
+        <div class="page-wrapper">
+            <!-- Page Content-->
+            <div class="page-content">
+{#                {% if app.User %}#}
+{#                {% endif %}#}
+                {% block body %} {% endblock %}
+            </div>
+        </div>
+        <!-- end page-wrapper -->
+        {% block javascripts %}
+            <!-- jQuery  -->
+            <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('assets/js/metismenu.min.js') }}"></script>
+            <script src="{{ asset('assets/js/waves.js') }}"></script>
+            <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+            <script src="{{ asset('assets/js/simplebar.min.js') }}"></script>
+            <script src="{{ asset('assets/js/moment.js') }}"></script>
+            <script src="{{ asset('assets/pages/jquery.analytics_dashboard.init.js') }}"></script>
+            <!-- App js -->
+            <script src="{{ asset('assets/js/app.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

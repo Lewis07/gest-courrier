@@ -1,0 +1,137 @@
+<!-- Left Sidenav -->
+<div class="left-sidenav">
+    <!-- logo -->
+    <div class="brand mb-3 d-flex align-items-center">
+        <a href="{{ url('home') }}" class="logo mx-1">
+            <img src="{{ asset('assets/images/omnis/logo.png') }}"
+                 width="40" height="80" alt="logo-small"
+                 class="mt-3 img-thumbnail"
+            >
+        </a>
+        <div class="ml-2">
+            <span class="text-success">MI</span>
+            <span class="text-white"> - FANDEFA</span>
+        </div>
+    </div>
+    <!--end logo-->
+    <!--items-->
+    <div class="menu-content h-100" data-simplebar>
+        <ul class="metismenu left-sidenav-menu">
+{#            {% if not is_granted("ROLE_ADMIN") %}#}
+                <li class="d-flex justify-content-between mb-3">
+                    <a href="{{ url('courrier_new') }}"
+                       class="btn bg-white btn-round px-3">
+                        <i class="fas fa-plus text-black"></i>
+                        <span class="text-black">Nouveau courrier</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url("courrier_received") }}">
+                        <i class="fas fa-envelope text-white"></i>
+                        <span>Boite de reception</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('courrier_sent') }}">
+                        <i class="fas fa-envelope text-white"></i>
+                        <span>Courriers envoyé</span>
+                    </a>
+                </li>
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <i class="fas fa-envelope text-white"></i>#}
+{#                        <span>Boite d'envoi</span>#}
+{#                    </a>#}
+{#                </li>#}
+                <li>
+                    <a href="{{ url('partage_courrier_index') }}">
+                        <i class="fas fa-share-alt text-white"></i>
+                        <span>Courrier partagé</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('courrier_archived') }}">
+                        <i class="fas fa-archive text-white"></i>
+                        <span>Courrier archivé</span>
+                    </a>
+                </li>
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <i class="fas fa-envelope text-white"></i>#}
+{#                        <span>Demander un avis</span>#}
+{#                    </a>#}
+{#                </li>#}
+                <li>
+                    <a href="{{ url('courrier_validation') }}">
+                        <i class="fas fa-envelope text-white"></i>
+{#                        <span>Demander une validation</span>#}
+                        <span>Validation de courrier</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('courrier_trash') }}">
+                        <i class="fas fa-trash text-white"></i>
+                        <span>Corbeille</span>
+                    </a>
+                </li>
+            {% if is_granted("ROLE_ADMIN") %}
+                <li>
+                    <a href="{{ url('admin_dashboard') }}">
+                        <i class="fas fa-chart-bar text-white"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_role_index') }}">
+                        <i class="fas fa-tasks text-white"></i>
+                        <span>Roles</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('direction_index') }}">
+                        <i class="fas fa-address-card text-white"></i>
+                        <span>Directions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_fonction_index') }}">
+                        <i class="fas fa-address-card text-white"></i>
+                        <span>Fonctions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_departement_index') }}">
+                        <i class="fas fa-desktop text-white"></i>
+                        <span>Départements</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_user_index') }}">
+                        <i class="fas fa-user-circle text-white"></i>
+                        <span>Utilisateurs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_type_dossier_index') }}">
+                        <i class="fas fa-folder text-white"></i>
+                        <span>Types de dossiers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_dossier_index') }}">
+                        <i class="fas fa-folder text-white"></i>
+                        <span>Dossiers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin_courrier_index') }}">
+                        <i class="fas fa-envelope text-white"></i>
+                        <span>Courriers</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    <!-- end items-->
+</div>
+<!-- end left-sidenav-->

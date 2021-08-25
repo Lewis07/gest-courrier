@@ -1,0 +1,106 @@
+{% extends 'base_admin.html.twig' %}
+{% block title %} {{ parent() }} Tableau de Bord {% endblock %}
+{% block body %}
+  {% include 'partials/header.html.twig' %}
+  <div class="container-fluid">
+    <!-- Page-Title breadcrumb-->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-title-box">
+          <div class="row">
+            <div class="col">
+              <ol class="breadcrumb d-flex align-items-center">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Gestion de Courrier</a></li>
+                <li class="breadcrumb-item active">Tableau de bord</li>
+              </ol>
+            </div><!--end col-->
+          </div><!--end row-->
+        </div><!--end page-title-box-->
+      </div><!--end col-->
+    </div><!--end row-->
+    <!-- end page title end breadcrumb -->
+
+    {#  banner  #}
+    <div class="banner d-flex justify-content-between align-items-start p-3">
+      <div class="text-white">Administration</div>
+      <div class="d-flex align-items-center">
+        <div class="input-rounded">
+          <i class="fas fa-search text-white"></i>
+          <input type="search" placeholder="Rechercher">
+        </div>
+        <div>
+          <ul class="list-unstyled topbar-nav float-right mb-0">
+            <li class="dropdown">
+              <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                 aria-haspopup="false" aria-expanded="false">
+                <img src="{{ asset('assets/images/users/User-5.jpg') }}" alt="profile-user" class="rounded-circle thumb-xs" />
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="">
+                  <i data-feather="user" class="align-self-center icon-xs icon-dual mr-1"></i>
+                  Profile
+                </a>
+                <div class="dropdown-divider mb-0"></div>
+                <a class="dropdown-item" href="">
+                  <i data-feather="power" class="align-self-center icon-xs icon-dual mr-1"></i>
+                  Déconnexion
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {#  End banner  #}
+
+    {#  Card statistique #}
+    <div class="card-statistic">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-tasks text-white"></i>
+              <span class="text-white mx-2">Roles</span>
+              <span class="text-white">{{ roles }}</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-address-card text-white"></i>
+              <span class="text-white mx-2">Directions</span>
+              <span class="text-white">{{ directions }}</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-address-card text-white"></i>
+              <span class="text-white mx-2">Fonctions</span>
+              <span class="text-white">{{ fonctions }}</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-desktop text-white"></i>
+              <span class="text-white mx-2">Département</span>
+              <span class="text-white">{{ departements }}</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-user-circle text-white"></i>
+              <span class="text-white mx-2">Utilisateurs</span>
+              <span class="text-white">{{ users }}</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-folder text-white"></i>
+              <span class="text-white mx-2">Types de dossiers</span>
+              <span class="text-white">{{ types_dossiers }}</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-folder text-white"></i>
+              <span class="text-white mx-2">Dossiers</span>
+              <span class="text-white">20</span>
+            </div>
+            <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+              <i class="fas fa-envelope text-white"></i>
+              <span class="text-white mx-2">Courriers</span>
+              <span class="text-white">35</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    {#  End Card statistique #}
+  </div>
+  <!-- container -->
+{% endblock %}

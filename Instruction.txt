@@ -1,0 +1,14 @@
+commandes :
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+Base de données dans le fichier : g_courrier.sql à importer dans phpmyadmin
+
+Compte utilisateurs :
+- admin : mail : admin@admin.com 	password : testtest
+- user : mail : user@user.com		password : useruser
+
+
+menu admin dans le fichier : partials/side_admin.html.twig
+menu user dans le fichier : partials/side.html.twig
+

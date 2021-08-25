@@ -1,0 +1,56 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}{{ parent() }} Connexion {% endblock %}
+
+{% block body %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" method="post">
+                    <h1><span class="login100-form-title p-b-43">Connectez-vous pour continuer</span></h1>
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error_message }}</div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control">
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <div class="flex-sb-m w-full p-t-3 p-b-32">
+                        <div class="contact100-form-checkbox">
+                            <input id="ckb1" type="checkbox" name="_remember_me">
+                            <label for="ckb1">
+                                Souviens-toi de moi
+                            </label>
+                        </div>
+                        <div>
+                            <a href="#" class="txt1">
+                                Mot de passe oublié?
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="submit">
+                            Connexion
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-46 p-b-20">
+                        <span class="txt2">
+                            <a href="">Créer un compte</a>
+                        </span>
+                    </div>
+                </form>
+                <div class="login100-more" style="background-image: url('bootstrap/login/images/mail.jpg');">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

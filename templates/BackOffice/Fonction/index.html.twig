@@ -1,0 +1,58 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Fonction {% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Fonctions</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Fonction</li>
+                            </ol>
+                        </div><!--end col-->
+                        <div class="col-auto align-self-center">
+                            <a href="{{ path('admin_fonction_new') }}" class="btn btn-primary float-right mb-3">
+                                <i class="fa fa-plus"></i>
+                                Nouveau fonction
+                            </a>
+                        </div>
+                    </div><!--end row-->
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for fonction in fonctions %}
+                        <tr>
+                            <td>{{ fonction.nomFonction }}</td>
+                            <td>
+                                <a href="{{ path('admin_fonction_edit',{id:fonction.id})}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ path('admin_fonction_delete',{id:fonction.id})}}"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

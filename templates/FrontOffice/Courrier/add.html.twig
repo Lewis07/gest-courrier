@@ -1,0 +1,47 @@
+{% extends "base_admin.html.twig" %}
+{% block title %}{{ parent() }} Envoie de courrier {% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Courriers</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item">Courrier</li>
+                                <li class="breadcrumb-item active">Demande de validation</li>
+                            </ol>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+                    {{ form_row(form.recipient) }}
+                    {{ form_row(form.typeCourrier) }}
+
+                    {% if app.request.attributes.get('_route') == "courrier_new" %}
+                        {{ form_row(form.objetCourrier) }}
+                    {% endif %}
+
+                    {{ form_row(form.message) }}
+                    <div class="d-flex">
+                        <button class="btn btn-info mx-1 rounded-0">Envoyer</button>
+                        <a href="{{ path('courrier_sent') }}"
+                           class="btn btn-warning rounded-0">
+                            Retourner
+                        </a>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

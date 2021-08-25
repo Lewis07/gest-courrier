@@ -1,0 +1,58 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Département {% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Départements</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Département</li>
+                            </ol>
+                        </div><!--end col-->
+                        <div class="col-auto align-self-center">
+                            <a href="{{ path('admin_departement_new') }}" class="btn btn-primary float-right mb-3">
+                                <i class="fa fa-plus"></i>
+                                Nouveau département
+                            </a>
+                        </div>
+                    </div><!--end row-->
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Département</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for departement in departements %}
+                        <tr>
+                            <td>{{ departement.nomDepartement }}</td>
+                            <td>
+                                <a href="{{ path('admin_departement_edit',{id:departement.id})}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ path('admin_departement_delete',{id:departement.id})}}"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

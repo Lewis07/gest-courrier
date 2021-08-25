@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Gcourier | {% block title %} Administration  {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+
+        <!-- App css -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/metisMenu.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="https://mannatthemes.com/dastone/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    {% block stylesheets %} {% endblock %}
+    </head>
+
+    <body class="dark-sidenav">
+        {% include 'partials/sidebar.html.twig' %}
+
+        <!-- page-wrapper -->
+        <div class="page-wrapper">
+            <!-- Page Content-->
+            <div class="page-content">
+{#                {% if app.User %}#}
+                {% include 'partials/header.html.twig' %}
+{#                {% endif %}#}
+                {% block body %} {% endblock %}
+{#                {% if app.User %}#}
+                <footer class="footer text-center text-sm-left">
+                    &copy; {{ date('Y') | date('Y') }} Gcourier <span class="d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by Devman</span>
+                </footer><!--end footer-->
+{#                {% endif %}#}
+            </div>
+        </div>
+        <!-- end page-wrapper -->
+
+        <!-- jQuery  -->
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/metismenu.min.js') }}"></script>
+        <script src="{{ asset('assets/js/waves.js') }}"></script>
+        <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/js/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/js/moment.js') }}"></script>
+        <script src="https://mannatthemes.com/dastone/plugins/daterangepicker/daterangepicker.js"></script>
+
+        <script src="https://mannatthemes.com/dastone/plugins/apex-charts/apexcharts.min.js"></script>
+        <script src="{{ asset('assets/pages/jquery.analytics_dashboard.init.js') }}"></script>
+        <script src="{{ asset("assets/all.min.js") }}"></script>
+
+        {% block javascripts %} {% endblock %}
+        <!-- App js -->
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+    </body>
+
+</html>

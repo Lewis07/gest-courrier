@@ -1,0 +1,67 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Boite de réception{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Boite de réception</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Boite de réception</li>
+                            </ol>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Emetteur</th>
+                        <th>Objet</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for received_courrier in received_courriers %}
+                        <tr>
+                            <td>{{ received_courrier.sender.email }}</td>
+                            <td class="{{ received_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
+                                {{ received_courrier.objetCourrier }}
+                            </td>
+                            <td>
+                                <a href="">
+                                    <i class="fas fa-share-alt text-info"></i>
+                                </a>
+                                <a href="{{ url('valide_request',{id:received_courrier.id}) }}">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                </a>
+                                <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ path('courrier_delete',{id:received_courrier.id})}}"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                    <i class="fas fa-trash text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr align="center">
+                            <td colspan="3">
+                                Aucun courrier reçu
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

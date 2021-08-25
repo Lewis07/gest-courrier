@@ -1,0 +1,116 @@
+/*body{
+    background-color: #f2f2f2;    
+}*/
+
+.bg-white{
+    background-color: #fff;
+}
+
+.text-black{
+    color: #000000 !important;
+}
+
+.bg-blue-darken{
+    background-color: #0c213a !important;
+}
+
+.margin-top-30{
+    margin-top: 30px !important;
+}
+
+.margin-left-20{
+    margin-left: 20px !important;
+}
+
+thead{
+    background: #0c213a;
+}
+
+thead tr th{
+    color: #fff !important;
+}
+
+.form-control,.form-control.is-invalid{
+    border-radius: 0;
+}
+
+.form-control:focus{
+    border: 1px solid #f1f1f1 !important;
+    border-radius: 0;
+}
+
+.form-control.is-invalid:focus{
+    border: 1px solid red !important;
+    border-radius: 0;
+}
+
+.font-weight-bold{
+    font-weight: bold !important;
+}
+
+/* banniere */
+.banner{
+    width: 100%;
+    height: 25vh;
+    background-color: #0c213a;
+    margin-bottom: -10px;
+}
+
+.input-rounded{
+    display: flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid #fff;
+    height: 30px;
+    padding: 10px 20px;
+}
+
+.input-rounded > input{
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+    color: #fff;
+}
+
+.input-rounded > input:focus{
+    outline-width: 0;
+}
+/* Fin banniere */
+
+/* Card Statistique */
+.card-statistic{
+    background-color: white;
+    width: 90%;
+    height: 60vh;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+                rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px !important;
+    border-radius: 25px;
+    margin-top: -60px;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.card-statistic-simple-user{
+    background-color: white;
+    width: 90%;
+    height: 30vh;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+                rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px !important;
+    border-radius: 25px;
+    margin-top: -60px;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.card-statistic-item{
+    height: 10vh !important;
+    border-radius: 10px !important;
+    background-color: #0c213a !important;
+    display: flex;
+    align-items: center;
+}
+/* Fin Card Statistique */

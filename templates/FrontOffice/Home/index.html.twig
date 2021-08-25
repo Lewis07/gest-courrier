@@ -1,0 +1,58 @@
+{% extends 'base_admin.html.twig' %}
+{% block title %} {{ parent() }} Accueil{% endblock %}
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <!-- Page-Title breadcrumb-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <ol class="breadcrumb d-flex align-items-center">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Gestion de Courrier</a></li>
+                                <li class="breadcrumb-item active">Accueil</li>
+                            </ol>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div><!--end row-->
+        <!-- end page title end breadcrumb -->
+
+        {#  banner  #}
+        <div class="banner d-flex justify-content-between align-items-start p-3">
+            <div class="text-white">
+                <div>
+                    <h2 class="text-white">Bienvenue {{ app.user ? app.user.username : "" }}</h2>
+                </div>
+            </div>
+        </div>
+        {#  End banner  #}
+
+        {#  Card statistique #}
+        <div class="card-statistic-simple-user">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+                        <i class="fas fa-folder text-white"></i>
+                        <span class="text-white mx-2">Courriers de départ</span>
+{#                        <span class="text-white">{{ types_dossiers }}</span>#}
+                    </div>
+                    <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+                        <i class="fas fa-folder text-white"></i>
+                        <span class="text-white mx-2">Courriers d'arrivée</span>
+                        <span class="text-white">20</span>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
+                        <i class="fas fa-envelope text-white"></i>
+                        <span class="text-white mx-2">Courriers archivés</span>
+                        <span class="text-white">35</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#  End Card statistique #}
+    </div>
+    <!-- container -->
+{% endblock %}

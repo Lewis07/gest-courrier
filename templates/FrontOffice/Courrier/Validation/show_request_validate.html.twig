@@ -1,0 +1,57 @@
+{% extends "base_admin.html.twig" %}
+{% block title %}{{ parent() }} Détail du courrier à valider{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Courriers</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item">Courrier</li>
+                                <li class="breadcrumb-item active">Courrier à valider</li>
+                            </ol>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="mb-2">
+                    <span class="font-weight-bold">Recepteur :</span>
+                    <span>{{ requests_courrier is defined ? requests_courrier.recipient.email : "" }}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold">Emetteur :</span>
+                    <span>{{ requests_courrier is defined ? requests_courrier.sender.email : "" }}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold">Objet :</span>
+                    <span>{{ requests_courrier is defined ? requests_courrier.objetCourrier : "" }}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold">Date d'envoi :</span>
+                    <span>
+                        {{ requests_courrier is defined ? requests_courrier.dateEnvoie|date('d/m/Y') : "" }} à
+                        {{ requests_courrier is defined ? requests_courrier.dateEnvoie|date('H:i') : "" }}
+                    </span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold">Type du courrier :</span>
+                    <span>{{ requests_courrier is defined ? requests_courrier.typeCourrier }}</span>
+                </div>
+                <div class="mt-4">
+                    <span class="font-weight-bold">Message :</span>
+                    <span>{{ requests_courrier is defined ? requests_courrier.message|raw }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

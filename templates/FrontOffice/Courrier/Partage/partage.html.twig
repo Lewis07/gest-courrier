@@ -1,0 +1,60 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Courrier partagé{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Courrier</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Partagé</li>
+                            </ol>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Recepteur</th>
+                        <th>Objet</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for partage_courrier in partage_courriers %}
+                        {% for recepteur in partage_courrier.sharer %}
+                            <tr>
+                                <td>{{ recepteur.email }}</td>
+                                <td></td>
+                                <td>
+    {#                                <a href="{{ path('courrier_archived_show',{id:archived_courrier.id})}}">#}
+    {#                                    <i class="fas fa-eye"></i>#}
+    {#                                </a>#}
+                                    <a href="{{ path('courrier_delete_trash',{id:partage_courrier.id})}}"
+                                       onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                        <i class="fas fa-trash text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr align="center">
+                            <td colspan="3">
+                                Aucun courrier partagé
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} Type de dossier {% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Types de dossiers</h4>
+                            <ol class="breadcrumb pt-3 d-flex align-items-center">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Gestion de Courrier</a>
+                                </li>
+                                <li class="breadcrumb-item active">Type de dossier</li>
+                            </ol>
+                        </div><!--end col-->
+                        <div class="col-auto align-self-center">
+                            <a href="{{ path('admin_type_dossier_new') }}" class="btn btn-primary float-right mb-3">
+                                <i class="fa fa-plus"></i>
+                                Nouveau type de dossier
+                            </a>
+                        </div>
+                    </div><!--end row-->
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Type de dossier</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for type_dossier in type_dossiers %}
+                        <tr>
+                            <td>{{ type_dossier.LibelleTypeDossier }}</td>
+                            <td>
+                                <a href="{{ path('admin_type_dossier_edit', {'id': type_dossier.id}) }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ path('admin_type_dossier_delete', {'id': type_dossier.id}) }}"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr align="center">
+                            <td colspan="2">Aucun type de dossier</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
