@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,6 +43,11 @@ class UserType extends AbstractType
             ->add('adresse',TextType::class, $this->getConfiguration("Adresse", "Lot..."))
             ->add('fonction',TextType::class, $this->getConfiguration("Fonction", "Fonction..."))
             ->add('username',TextType::class, $this->getConfiguration("Username", "Surnom"))
+            ->add('picture',FileType::class,[
+                'label' => 'Mettez un photo...',
+                'required' => false,
+                'mapped' => false
+            ])
             ->add('password',PasswordType::class, $this->getConfiguration("Mot de passe", "Mot de passe..."))
             ->add('confirm_password',PasswordType::class, $this->getConfiguration("Confirmation du mot de passe", "Répétez votre mot de passe..."));
 //            ->add('Roles', ChoiceType::class, [

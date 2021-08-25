@@ -100,6 +100,11 @@ class User implements UserInterface
      */
     private $envoyeur;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->courriers = new ArrayCollection();
@@ -355,6 +360,18 @@ class User implements UserInterface
                 $envoyeur->setSender(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

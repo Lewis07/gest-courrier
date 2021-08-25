@@ -10,8 +10,11 @@
             {{ form_start(form) }}
             <div>
                 <img src="{{ asset('img/no-image.png') }}" class="avatar" alt="avatar">
-                <h6>Mettez un photo...</h6>
-                <input type="file" class="text-center center-block file-upload">
+{#                <h6>Mettez un photo...</h6>#}
+{#                <input type="file" class="text-center center-block file-upload">#}
+                <div class="row">
+                    <div class="col-md-5">{{ form_row(form.picture) }}</div>
+                </div>
             </div></hr><br>
 
             <div class="row">

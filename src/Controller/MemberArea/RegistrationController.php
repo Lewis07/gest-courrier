@@ -4,6 +4,7 @@ namespace App\Controller\MemberArea;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,14 +18,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     private $em;
+    private $uploadFileService;
 
     /**
      * RegistrationController constructor.
      * @param EntityManagerInterface $em
+     * @param UploadFileService $uploadFileService
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, UploadFileService $uploadFileService)
     {
         $this->em = $em;
+        $this->uploadFileService = $uploadFileService;
     }
 
     /**
@@ -44,12 +48,13 @@ class RegistrationController extends AbstractController
         if($form->isSubmitted() && $form->isValid() ){
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $this->uploadFileService->uploadFile($form, $user, "picture", "upload_images_users_directory");
             $this->em->persist($user);
             $this->em->flush();
 
             $this->addFlash(
                 'success',
-                "L’<strong>utilisateur</strong> a été bien ajouter "
+                "L’<strong>utilisateur</strong> a été bien inscrit"
             );
 
             return $this->redirectToRoute('app_login');
