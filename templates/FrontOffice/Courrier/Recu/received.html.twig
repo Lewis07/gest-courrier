@@ -40,6 +40,9 @@
                                 <a href="{{ url('valide_request',{id:received_courrier.id}) }}">
                                     <i class="fas fa-check-circle text-success"></i>
                                 </a>
+                                <a href="{{ url('archived',{id:received_courrier.id}) }}">
+                                    <i class="fas fa-archive text-primary"></i>
+                                </a>
                                 <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}">
                                     <i class="fas fa-eye"></i>
                                 </a>

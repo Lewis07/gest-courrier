@@ -310,6 +310,33 @@ class CourrierController extends AbstractController
     }
 
     /**
+     * Archivé
+     * @Route("/{id}/achive-le-courrier", name="archived")
+     * @return Response
+     */
+    public function archivedCourrier(Courrier $courrier): Response
+    {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('app_login');
+        }
+
+        $courrier->setIsArchived(true);
+        $this->em->persist($courrier);
+        $this->em->flush();
+
+        $user_id = $this->getUser()->getId();
+
+        if (!empty($user_id)){
+            $received_courriers = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0]);
+            $count_received_courrier_read = count($this->courrierRepository->findBy(['isRead' => 0]));
+        }
+
+        return $this->render('FrontOffice/Courrier/Recu/received.html.twig',
+            compact('received_courriers','count_received_courrier_read')
+        );
+    }
+
+    /**
      * @Route("/Courrier/{id}/edit", name="courrier_edit")
      */
     public function edit(Request $request,EntityManagerInterface $manager,Courrier $courrier)
