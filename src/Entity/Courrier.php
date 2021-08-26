@@ -74,6 +74,11 @@ class Courrier
      */
     private $isSend = 0;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fichier;
+
     public function __construct()
     {
         $this->dateEnvoie= new \DateTime();
@@ -212,6 +217,18 @@ class Courrier
     public function setIsSend(?bool $isSend): self
     {
         $this->isSend = $isSend;
+
+        return $this;
+    }
+
+    public function getFichier(): ?string
+    {
+        return $this->fichier;
+    }
+
+    public function setFichier(?string $fichier): self
+    {
+        $this->fichier = $fichier;
 
         return $this;
     }

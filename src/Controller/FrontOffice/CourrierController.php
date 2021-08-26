@@ -7,6 +7,7 @@ use App\Form\CourrierType;
 use App\Form\ValidationCourrierType;
 use App\Repository\CourrierRepository;
 use App\Service\SendEmailService;
+use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,7 @@ class CourrierController extends AbstractController
     private $em;
     private $courrierRepository;
     private $sendEmail;
+    private $uploadFileService;
 
     /**
      * CourrierController constructor.
@@ -31,11 +33,12 @@ class CourrierController extends AbstractController
      * @param SendEmailService $sendEmail
      */
     public function __construct(EntityManagerInterface $em, CourrierRepository $courrierRepository,
-                                SendEmailService $sendEmail)
+                                SendEmailService $sendEmail, UploadFileService $uploadFileService)
     {
         $this->em = $em;
         $this->courrierRepository = $courrierRepository;
         $this->sendEmail = $sendEmail;
+        $this->uploadFileService = $uploadFileService;
     }
 
     /**
@@ -56,6 +59,7 @@ class CourrierController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid() ){
             $courrier->setSender($this->getUser());
+            $this->uploadFileService->uploadFile($form, $courrier, "fichier", "upload_images_courriers_directory");
 
             $this->em->persist($courrier);
             $this->em->flush();

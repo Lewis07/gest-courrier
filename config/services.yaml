@@ -8,6 +8,7 @@ parameters:
     upload_directory: '%kernel.project_dir%/public/uploads'
     app.path.product_images: /uploads/images/products
     upload_images_users_directory: '%kernel.project_dir%/public/uploads/images/users'
+    upload_images_courriers_directory: '%kernel.project_dir%/public/uploads/courriers'
 
 services:
     # default configuration for services in *this* file

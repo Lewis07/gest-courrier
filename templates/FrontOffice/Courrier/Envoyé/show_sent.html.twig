@@ -46,7 +46,18 @@
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
                     <span>{{ sent_courrier is defined ? sent_courrier.typeCourrier }}</span>
+                    <a href="{{ asset('uploads/courriers/' ~ sent_courrier.fichier ) }}">Voir le fichier</a>
                 </div>
+
+{#                {% if sent_courrier.fichier is defined %}#}
+{#                    <div class="mb-2 {{ sent_courrier.fichier is null ? 'd-none' : '' }}">#}
+{#                        <span class="font-weight-bold">Voir le courrier :</span>#}
+{#                        <span>#}
+{#                            <a href="{{ asset('uploads/courriers/' ~ sent_courrier.fichier ) }}">Voir le fichier</a>#}
+{#                        </span>#}
+{#                    </div>#}
+{#                {% endif %}#}
+
                 <div class="mt-4">
                     <span class="font-weight-bold">Message :</span>
                     <span>{{ sent_courrier is defined ? sent_courrier.message|raw }}</span>

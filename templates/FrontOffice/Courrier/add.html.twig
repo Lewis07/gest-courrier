@@ -33,6 +33,7 @@
                     {% endif %}
 
                     {{ form_row(form.message) }}
+                    {{ form_row(form.fichier) }}
                     <div class="d-flex">
                         <button class="btn btn-info mx-1 rounded-0">Envoyer</button>
                         <a href="{{ path('courrier_sent') }}"
