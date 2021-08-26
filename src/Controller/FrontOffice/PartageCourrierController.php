@@ -34,8 +34,6 @@ class PartageCourrierController extends AbstractController
      */
     public function index(): Response
     {
-//        $partage_courriers = $this->partageCourrierRepository->findAll();
-
         if ($this->getUser()){
             $partage_courriers = $this->partageCourrierRepository->partageCourrierUtilisateur($this->getUser()->getId());
         }
