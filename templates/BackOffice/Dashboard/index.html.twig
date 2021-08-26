@@ -28,7 +28,7 @@
           <i class="fas fa-search text-white"></i>
           <input type="search" placeholder="Rechercher">
         </div>
-        <div>
+        {# <div>
           <ul class="list-unstyled topbar-nav float-right mb-0">
             <li class="dropdown">
               <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
@@ -48,7 +48,7 @@
               </div>
             </li>
           </ul>
-        </div>
+        </div> #}
       </div>
     </div>
     {#  End banner  #}
@@ -90,12 +90,12 @@
             <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
               <i class="fas fa-folder text-white"></i>
               <span class="text-white mx-2">Dossiers</span>
-              <span class="text-white">20</span>
+              <span class="text-white">{{ dossiers }}</span>
             </div>
             <div class="col-lg-3 col-sm-12 margin-top-30 margin-left-20 card-statistic-item">
               <i class="fas fa-envelope text-white"></i>
               <span class="text-white mx-2">Courriers</span>
-              <span class="text-white">35</span>
+              <span class="text-white">{{ courriers }}</span>
             </div>
           </div>
         </div>
