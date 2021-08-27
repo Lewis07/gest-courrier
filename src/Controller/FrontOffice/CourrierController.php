@@ -325,33 +325,33 @@ class CourrierController extends AbstractController
      * @Route("/{id}/achive-le-courrier", name="archived")
      * @return Response
      */
-    public function archivedCourrier(Courrier $courrier, $id): Response
+    public function archivedCourrier(Courrier $courrier, $id, Request $request): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
         }
 
-        $courrier->setIsArchived(true);
-        $this->em->persist($courrier);
-        $this->em->flush();
+        if ($request->isMethod('POST')){
+            $courrier->setIsArchived(true);
+            $this->em->persist($courrier);
+            $this->em->flush();
 
-        $user = $this->getUser();
-        $user_id = $user->getId();
+            $user = $this->getUser();
+            $user_id = $user->getId();
 
-        if (!empty($user_id)){
-            $received_courriers = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0]);
-            $count_received_courrier_read = count($this->courrierRepository->findBy(['isRead' => 0]));
-        }
+            if (!empty($user_id)){
+                $received_courriers = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0]);
+                $count_received_courrier_read = count($this->courrierRepository->findBy(['isRead' => 0]));
+            }
 
-        $courrier_archive = new CourrierArchive();
-        $courrier_archive->setCourrier($courrier);
-        $courrier_archive->setUser($this->getUser());
+            $courrier_archive = new CourrierArchive();
+            $courrier_archive->setCourrier($courrier);
+            $courrier_archive->setUser($this->getUser());
 
-        $this->em->persist($courrier_archive);
-        $this->em->flush();
+            $this->em->persist($courrier_archive);
+            $this->em->flush();
 
-        if ($this->em->flush()){
-            $this->redirectToRoute('courrier_archived');
+            return $this->redirectToRoute('courrier_archived');
         }
 
         return $this->render('FrontOffice/Courrier/Recu/received.html.twig',

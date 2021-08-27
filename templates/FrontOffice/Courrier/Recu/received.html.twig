@@ -36,14 +36,16 @@
                             <td class="{{ received_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                 {{ received_courrier.objetCourrier }}
                             </td>
-                            <td>
-                                <a href="{{ url('valide_request',{id:received_courrier.id}) }}">
+                            <td class="d-flex align-items-center">
+                                <a href="{{ url('valide_request',{id:received_courrier.id}) }}" class="px-1">
                                     <i class="fas fa-check-circle text-success"></i>
                                 </a>
-                                <a href="{{ url('archived',{id:received_courrier.id}) }}">
-                                    <i class="fas fa-archive text-primary"></i>
-                                </a>
-                                <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}">
+                                <form action="{{ url('archived',{id:received_courrier.id}) }}" method="post">
+                                    <button type="submit" class="px-1">
+                                        <i class="fas fa-archive text-primary"></i>
+                                    </button>
+                                </form>
+                                <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}" class="px-1">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="{{ path('courrier_delete',{id:received_courrier.id})}}"
