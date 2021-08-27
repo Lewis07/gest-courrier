@@ -51,11 +51,6 @@ class User implements UserInterface
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Fonction;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
     private $username;
@@ -109,6 +104,18 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=CourrierArchive::class, mappedBy="user")
      */
     private $courrierArchives;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Fonction::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $fonction;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $departement;
 
     public function __construct()
     {
@@ -186,18 +193,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFonction(): ?string
-    {
-        return $this->Fonction;
-    }
-
-    public function setFonction(string $Fonction): self
-    {
-        $this->Fonction = $Fonction;
-
-        return $this;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
@@ -233,13 +228,11 @@ class User implements UserInterface
 
     public function getRoles(): array
     {
-        $role = json_encode($this->roles);
-        //dd($role);
-        //guarantee every User at least has ROLE_USER
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-        $roles[] = 'ROLE_ADMIN';
-        //return array_unique($roles);
-        return $this->roles;
+
+        return array_unique($roles);
     }
 
     /**
@@ -408,6 +401,30 @@ class User implements UserInterface
                 $courrierArchive->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFonction(): ?Fonction
+    {
+        return $this->fonction;
+    }
+
+    public function setFonction(?Fonction $fonction): self
+    {
+        $this->fonction = $fonction;
+
+        return $this;
+    }
+
+    public function getDepartement(): ?Departement
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(?Departement $departement): self
+    {
+        $this->departement = $departement;
 
         return $this;
     }

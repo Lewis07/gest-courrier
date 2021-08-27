@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Departement;
+use App\Entity\Fonction;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,7 +38,14 @@ class ProfileType extends AbstractType
             ->add('telephone', TextType::class, $this->getConfiguration("Numero Telephone", "+261..."))
             ->add('email', EmailType::class, $this->getConfiguration("email", "Adresse email..."))
             ->add('adresse', TextType::class, $this->getConfiguration("Adresse", "Lot..."))
-            ->add('fonction', TextType::class, $this->getConfiguration("Fonction", "Fonction..."))
+            ->add('fonction',EntityType::class, [
+                'class' => Fonction::class,
+                'choice_label' => 'nomFonction'
+            ])
+            ->add('departement',EntityType::class, [
+                'class' => Departement::class,
+                'choice_label' => 'nomDepartement'
+            ])
             ->add('username', TextType::class, $this->getConfiguration("Username", "Surnom"));
     }
 

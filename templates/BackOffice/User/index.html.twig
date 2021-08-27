@@ -30,7 +30,7 @@
                         <th>Email</th>
                         <th>Adresse</th>
                         <th>Fonction</th>
-                        {#                        <th>Service</th>#}
+                        <th>Département</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -38,19 +38,19 @@
                     <tbody>
                     {% for user in users %}
                         <tr>
-                            <td>{{ user.Nom }}</td>
-                            <td>{{ user.Prenom }}</td>
-                            <td>{{ user.Username }}</td>
-                            <td>{{ user.Telephone }}</td>
+                            <td>{{ user.nom }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.telephone }}</td>
                             <td>{{ user.email }}</td>
-                            <td>{{ user.Adresse }}</td>
-                            <td>{{ user.Fonction }}</td>
-                            {#                            <td>{{ user.service.nomservice }}</td>#}
+                            <td>{{ user.adresse }}</td>
+                            <td>{{ user.fonction.nomFonction }}</td>
+                            <td>{{ user.departement.nomDepartement }}</td>
                             <td>
-                                <a href="{{ path('admin_user_edit',{id:user.id})}}">
+                                <a href="{{ path('admin_user_edit',{id:user.id}) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ path('admin_user_delete',{id:user.id})}}"
+                                <a href="{{ path('admin_user_delete',{id:user.id}) }}"
                                    onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                     <i class="fas fa-trash"></i>
                                 </a>

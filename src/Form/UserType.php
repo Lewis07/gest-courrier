@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Departement;
+use App\Entity\Fonction;
 use App\Entity\User;
 use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
@@ -41,38 +43,28 @@ class UserType extends AbstractType
             ->add('telephone',TextType::class, $this->getConfiguration("Numero Telephone", "+261..."))
             ->add('email',EmailType::class, $this->getConfiguration("email", "Adresse email..."))
             ->add('adresse',TextType::class, $this->getConfiguration("Adresse", "Lot..."))
-            ->add('fonction',TextType::class, $this->getConfiguration("Fonction", "Fonction..."))
+            ->add('fonction',EntityType::class, [
+                'class' => Fonction::class,
+                'choice_label' => 'nomFonction'
+            ])
+            ->add('departement',EntityType::class, [
+                'class' => Departement::class,
+                'choice_label' => 'nomDepartement'
+            ])
             ->add('username',TextType::class, $this->getConfiguration("Username", "Surnom"))
             ->add('picture',FileType::class,[
                 'label' => 'Mettez un photo...',
                 'required' => false,
                 'mapped' => false
             ])
-            ->add('password',PasswordType::class, $this->getConfiguration("Mot de passe", "Mot de passe..."))
-            ->add('confirm_password',PasswordType::class, $this->getConfiguration("Confirmation du mot de passe", "Répétez votre mot de passe..."));
-//            ->add('Roles', ChoiceType::class, [
-//                'required' => true,
-//                'multiple' => false,
-//                'expanded' => false,
-//                'label' => 'Rôles',
-//                'choices'  => [
-//                    'Administrateur ' => 'ROLE_ADMIN',
-//                    'Utilisateur' => 'ROLE_USER',
-//                ],
-//            ]);
-
-            // Data transformer
-//        $builder->get('Roles')
-//        ->addModelTransformer(new CallbackTransformer(
-//            function ($rolesArray) {
-//                 // transform the array to a string
-//                 return count($rolesArray)? $rolesArray[0]: null;
-//            },
-//            function ($rolesString) {
-//                 // transform the string back to an array
-//                 return [$rolesString];
-//            }
-//    ));
+//            ->add('password',PasswordType::class, $this->getConfiguration("Mot de passe", "Mot de passe..."))
+            ->add('password',PasswordType::class, [
+                'label' => 'Mot de passe'
+            ])
+            ->add('confirm_password',PasswordType::class, [
+                'label' => 'Confirmer le mot de passe'
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

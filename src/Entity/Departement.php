@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DepartementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -27,6 +29,16 @@ class Departement
      */
     private $nomDepartement;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="departement")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -40,6 +52,36 @@ class Departement
     public function setNomDepartement(string $nomDepartement): self
     {
         $this->nomDepartement = $nomDepartement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setDepartement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getDepartement() === $this) {
+                $user->setDepartement(null);
+            }
+        }
 
         return $this;
     }
