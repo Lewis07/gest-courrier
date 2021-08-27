@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DirectionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,6 +41,16 @@ class Direction
     private $descrDir;
 
     /**
+     * @ORM\OneToMany(targetEntity=Departement::class, mappedBy="direction")
+     */
+    private $departements;
+
+    public function __construct()
+    {
+        $this->departements = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -70,6 +82,36 @@ class Direction
     public function setDescrDir(string $descrDir): self
     {
         $this->descrDir = $descrDir;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Departement[]
+     */
+    public function getDepartements(): Collection
+    {
+        return $this->departements;
+    }
+
+    public function addDepartement(Departement $departement): self
+    {
+        if (!$this->departements->contains($departement)) {
+            $this->departements[] = $departement;
+            $departement->setDirection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepartement(Departement $departement): self
+    {
+        if ($this->departements->removeElement($departement)) {
+            // set the owning side to null (unless already changed)
+            if ($departement->getDirection() === $this) {
+                $departement->setDirection(null);
+            }
+        }
 
         return $this;
     }

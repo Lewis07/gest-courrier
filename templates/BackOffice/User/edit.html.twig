@@ -23,9 +23,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-4">
                 {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-                    {{ form_row(form.roles) }}
+                    {{ form_label(form.roles) }}
+                    {{ form_widget(form.roles) }}
                     <div class="d-flex">
                         <button class="btn btn-success mx-2 rounded-0">Modifier</button>
                         <a href="{{ path('admin_user_index') }}"

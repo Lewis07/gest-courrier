@@ -86,6 +86,11 @@ class Courrier
      */
     private $courrierArchives;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $reference;
+
     public function __construct()
     {
         $this->dateEnvoie= new \DateTime();
@@ -267,6 +272,18 @@ class Courrier
                 $courrierArchive->setCourrier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

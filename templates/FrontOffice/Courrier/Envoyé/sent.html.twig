@@ -30,6 +30,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% set route_name = app.request.attributes.get('_route') %}
                     {% for sent_courrier in sent_courriers %}
                         <tr>
                             <td>{{ sent_courrier.recipient.email }}</td>
@@ -43,6 +44,7 @@
                                 <a href="{{ path('courrier_sent_show',{id:sent_courrier.id})}}">
                                     <i class="fas fa-eye"></i>
                                 </a>
+{#                                <a href="/{{ sent_courrier.id }}/delete-to-trash/{{ route_name }}"#}
                                 <a href="{{ path('courrier_delete_trash',{id:sent_courrier.id})}}"
                                    onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                     <i class="fas fa-trash text-danger"></i>

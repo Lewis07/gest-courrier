@@ -71,6 +71,12 @@ class CourrierController extends AbstractController
             $this->em->persist($courrier);
             $this->em->flush();
 
+            /*$_courrier_saved_id = $courrier->getId();
+            $reference = "CR".$_courrier_saved_id;
+            $courrier->setReference($reference);*/
+
+            $this->em->flush();
+
             $this->addFlash("success", "message envoyé avec succès");
 
             return $this->redirectToRoute("courrier_sent");
@@ -144,7 +150,7 @@ class CourrierController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $sent_courriers = $this->courrierRepository->findBy(['sender' => $user_id]);
+            $sent_courriers = $this->courrierRepository->findBy(['sender' => $user_id,'isInTrashed' => 0]);
         }
 
         return $this->render('FrontOffice/Courrier/Envoyé/sent.html.twig', compact('sent_courriers'));
@@ -254,7 +260,7 @@ class CourrierController extends AbstractController
             'message' => $message,
         ];
 
-        $this->sendEmail->send($emailFrom, $emailTo, $subject, $templale, $context);
+//        $this->sendEmail->send($emailFrom, $emailTo, $subject, $templale, $context);
 
 //        dd($context);
 
@@ -282,6 +288,29 @@ class CourrierController extends AbstractController
         return $this->render('FrontOffice/Courrier/Validation/show_request_validate.html.twig', compact('request_courrier'));
     }
 
+//    /* @Route("/{id}/delete-to-trash/{route_name}", name="courrier_delete_trash") */
+
+    /**
+     * Suppression du courrier vers corbeille
+     * @Route("/{id}/delete-to-trash", name="courrier_delete_trash")
+     * @param Courrier $courrier
+     * @param Request $request
+     * @param $route_name
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteInTrash(Courrier $courrier, Request $request)
+    {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('app_login');
+        }
+
+        $courrier->setIsInTrashed(true);
+        $this->em->persist($courrier);
+        $this->em->flush();
+
+        return $this->redirectToRoute('courrier_sent');
+    }
+
     /**
      * Affiche le courrier archivé
      * @Route("/archive", name="courrier_archived")
@@ -302,22 +331,6 @@ class CourrierController extends AbstractController
         return $this->render('FrontOffice/Courrier/Archive/archived.html.twig',
             compact('archived_courriers')
         );
-    }
-
-    /**
-     * Corbeille
-     * @Route("/corbeille", name="courrier_trash")
-     * @return Response
-     */
-    public function trash(): Response
-    {
-        if (!$this->getUser()){
-            return $this->redirectToRoute('app_login');
-        }
-
-        $trashes = $this->courrierRepository->findBy(['isInTrashed' => 1]);
-
-        return $this->render('FrontOffice/Courrier/Corbeille/trash.html.twig', compact('trashes'));
     }
 
     /**
@@ -384,22 +397,19 @@ class CourrierController extends AbstractController
     }
 
     /**
-     * Suppression du courrier vers corbeille
-     * @Route("/{id}/delete-to-trash", name="courrier_delete_trash")
-     * @param Courrier $courrier
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * Corbeille
+     * @Route("/corbeille", name="courrier_trash")
+     * @return Response
      */
-    public function deleteInTrash(Courrier $courrier)
+    public function trash(): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
         }
 
-        $courrier->setIsInTrashed(true);
-        $this->em->persist($courrier);
-        $this->em->flush();
+        $trashes = $this->courrierRepository->findBy(['isInTrashed' => 1]);
 
-        return $this->redirectToRoute('courrier_received');
+        return $this->render('FrontOffice/Courrier/Corbeille/trash.html.twig', compact('trashes'));
     }
 
     /**

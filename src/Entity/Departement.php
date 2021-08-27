@@ -34,6 +34,12 @@ class Departement
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Direction::class, inversedBy="departements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $direction;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -82,6 +88,18 @@ class Departement
                 $user->setDepartement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDirection(): ?Direction
+    {
+        return $this->direction;
+    }
+
+    public function setDirection(?Direction $direction): self
+    {
+        $this->direction = $direction;
 
         return $this;
     }

@@ -26,6 +26,7 @@
                     <tr>
                         <th>Emetteur</th>
                         <th>Objet</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -35,6 +36,9 @@
                             <td>{{ trashe.sender.email }}</td>
                             <td>
                                 {{ trashe.objetCourrier }}
+                            </td>
+                            <td>
+                                {{ trashe.dateEnvoie|date('d/m/Y') }}
                             </td>
                             <td>
 {#                                <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}">#}

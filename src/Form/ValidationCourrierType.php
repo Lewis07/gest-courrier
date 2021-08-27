@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Courrier;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -27,6 +28,11 @@ class ValidationCourrierType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
+            ])
+            ->add('fichier',FileType::class,[
+                'label' => 'Fichier',
+                'required' => false,
+                'mapped' => false
             ])
         ;
     }
