@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CourrierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,9 +81,15 @@ class Courrier
      */
     private $fichier;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CourrierArchive::class, mappedBy="courrier")
+     */
+    private $courrierArchives;
+
     public function __construct()
     {
         $this->dateEnvoie= new \DateTime();
+        $this->courrierArchives = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,6 +237,36 @@ class Courrier
     public function setFichier(?string $fichier): self
     {
         $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CourrierArchive[]
+     */
+    public function getCourrierArchives(): Collection
+    {
+        return $this->courrierArchives;
+    }
+
+    public function addCourrierArchive(CourrierArchive $courrierArchive): self
+    {
+        if (!$this->courrierArchives->contains($courrierArchive)) {
+            $this->courrierArchives[] = $courrierArchive;
+            $courrierArchive->setCourrier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourrierArchive(CourrierArchive $courrierArchive): self
+    {
+        if ($this->courrierArchives->removeElement($courrierArchive)) {
+            // set the owning side to null (unless already changed)
+            if ($courrierArchive->getCourrier() === $this) {
+                $courrierArchive->setCourrier(null);
+            }
+        }
 
         return $this;
     }

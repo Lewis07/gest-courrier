@@ -3,8 +3,10 @@
 namespace App\Controller\FrontOffice;
 
 use App\Entity\Courrier;
+use App\Entity\CourrierArchive;
 use App\Form\CourrierType;
 use App\Form\ValidationCourrierType;
+use App\Repository\CourrierArchiveRepository;
 use App\Repository\CourrierRepository;
 use App\Service\SendEmailService;
 use App\Service\UploadFileService;
@@ -25,20 +27,25 @@ class CourrierController extends AbstractController
     private $courrierRepository;
     private $sendEmail;
     private $uploadFileService;
+    private $courrierArchiveRepository;
 
     /**
      * CourrierController constructor.
      * @param EntityManagerInterface $em
      * @param CourrierRepository $courrierRepository
      * @param SendEmailService $sendEmail
+     * @param UploadFileService $uploadFileService
+     * @param CourrierArchiveRepository $courrierArchiveRepository
      */
     public function __construct(EntityManagerInterface $em, CourrierRepository $courrierRepository,
-                                SendEmailService $sendEmail, UploadFileService $uploadFileService)
+                                SendEmailService $sendEmail, UploadFileService $uploadFileService,
+                                CourrierArchiveRepository $courrierArchiveRepository)
     {
         $this->em = $em;
         $this->courrierRepository = $courrierRepository;
         $this->sendEmail = $sendEmail;
         $this->uploadFileService = $uploadFileService;
+        $this->courrierArchiveRepository = $courrierArchiveRepository;
     }
 
     /**
@@ -289,7 +296,7 @@ class CourrierController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $archived_courriers = $this->courrierRepository->findBy(['recipient' => $user_id, 'isArchived' => 1, 'isInTrashed' => 0]);
+            $archived_courriers = $this->courrierArchiveRepository->findBy(['user' => $user_id]);
         }
 
         return $this->render('FrontOffice/Courrier/Archive/archived.html.twig',
@@ -318,7 +325,7 @@ class CourrierController extends AbstractController
      * @Route("/{id}/achive-le-courrier", name="archived")
      * @return Response
      */
-    public function archivedCourrier(Courrier $courrier): Response
+    public function archivedCourrier(Courrier $courrier, $id): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
@@ -328,11 +335,23 @@ class CourrierController extends AbstractController
         $this->em->persist($courrier);
         $this->em->flush();
 
-        $user_id = $this->getUser()->getId();
+        $user = $this->getUser();
+        $user_id = $user->getId();
 
         if (!empty($user_id)){
             $received_courriers = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0]);
             $count_received_courrier_read = count($this->courrierRepository->findBy(['isRead' => 0]));
+        }
+
+        $courrier_archive = new CourrierArchive();
+        $courrier_archive->setCourrier($courrier);
+        $courrier_archive->setUser($this->getUser());
+
+        $this->em->persist($courrier_archive);
+        $this->em->flush();
+
+        if ($this->em->flush()){
+            $this->redirectToRoute('courrier_archived');
         }
 
         return $this->render('FrontOffice/Courrier/Recu/received.html.twig',

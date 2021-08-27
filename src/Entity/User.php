@@ -105,6 +105,11 @@ class User implements UserInterface
      */
     private $picture;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CourrierArchive::class, mappedBy="user")
+     */
+    private $courrierArchives;
+
     public function __construct()
     {
         $this->courriers = new ArrayCollection();
@@ -113,6 +118,7 @@ class User implements UserInterface
         $this->received = new ArrayCollection();
         $this->partageCourriers = new ArrayCollection();
         $this->envoyeur = new ArrayCollection();
+        $this->courrierArchives = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -372,6 +378,36 @@ class User implements UserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CourrierArchive[]
+     */
+    public function getCourrierArchives(): Collection
+    {
+        return $this->courrierArchives;
+    }
+
+    public function addCourrierArchive(CourrierArchive $courrierArchive): self
+    {
+        if (!$this->courrierArchives->contains($courrierArchive)) {
+            $this->courrierArchives[] = $courrierArchive;
+            $courrierArchive->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourrierArchive(CourrierArchive $courrierArchive): self
+    {
+        if ($this->courrierArchives->removeElement($courrierArchive)) {
+            // set the owning side to null (unless already changed)
+            if ($courrierArchive->getUser() === $this) {
+                $courrierArchive->setUser(null);
+            }
+        }
 
         return $this;
     }
