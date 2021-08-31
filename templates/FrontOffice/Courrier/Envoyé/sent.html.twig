@@ -33,7 +33,7 @@
                     {% set route_name = app.request.attributes.get('_route') %}
                     {% for sent_courrier in sent_courriers %}
                         <tr>
-                            <td>{{ sent_courrier.recipient.email }}</td>
+                            <td>{{ sent_courrier.recipient.username }}</td>
                             <td class="{{ sent_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                 {{ sent_courrier.objetCourrier }}
                             </td>

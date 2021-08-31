@@ -31,6 +31,7 @@
                     <thead>
                         <tr>
                             <th>Département</th>
+                            <th>Direction</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                     {% for departement in departements %}
                         <tr>
                             <td>{{ departement.nomDepartement }}</td>
+                            <td>{{ departement.direction.nomDirection }}</td>
                             <td>
                                 <a href="{{ path('admin_departement_edit',{id:departement.id})}}">
                                     <i class="fas fa-edit"></i>

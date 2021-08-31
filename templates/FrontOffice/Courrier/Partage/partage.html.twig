@@ -32,8 +32,10 @@
                     {% for partage_courrier in partage_courriers %}
                         {% for recepteur in partage_courrier.sharer %}
                             <tr>
-                                <td>{{ recepteur.email }}</td>
-                                <td></td>
+                                <td>{{ recepteur.username }}</td>
+                                <td>
+                                      
+                                </td>
                                 <td>
     {#                                <a href="{{ path('courrier_archived_show',{id:archived_courrier.id})}}">#}
     {#                                    <i class="fas fa-eye"></i>#}
