@@ -18,17 +18,22 @@ class Courrier
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    
     /**
      * @ORM\Column(type="datetime")
      */
     private $dateEnvoie;
-
+    
+        /**
+         * @ORM\Column(type="string", length=50)
+         */
+        private $priorite;
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $objetCourrier;
-
+    
     /**
      * @ORM\Column(type="text")
      */
@@ -54,43 +59,43 @@ class Courrier
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="received")
      * @ORM\JoinColumn(nullable=true)
      */
     private $recipient;
-
+    
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isArchived = 0;
-
+    
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isInTrashed = 0;
-
+    
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isSend = 0;
-
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fichier;
-
+    
     /**
      * @ORM\OneToMany(targetEntity=CourrierArchive::class, mappedBy="courrier")
      */
     private $courrierArchives;
-
+    
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $reference;
-
+    
     public function __construct()
     {
         $this->dateEnvoie= new \DateTime();
@@ -284,6 +289,18 @@ class Courrier
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getPriorite(): ?string
+    {
+        return $this->priorite;
+    }
+
+    public function setPriorite(string $priorite): self
+    {
+        $this->priorite = $priorite;
 
         return $this;
     }

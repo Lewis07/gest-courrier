@@ -23,7 +23,7 @@ class ProfileType extends AbstractType
      */
     private function getConfiguration($label, $placeholder){
         return[
-//            'label' => false,
+           'label' => $label,
             'attr' => [
                 'placeholder' => $placeholder
             ]
@@ -33,7 +33,7 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class, $this->getConfiguration("Nom", "Nom d'utilisateur..."))
+            ->add('nom', TextType::class, $this->getConfiguration("Nom", "Nom ..."))
             ->add('prenom', TextType::class, $this->getConfiguration("Prenom", "Prenom d'utilisateur..."))
             ->add('telephone', TextType::class, $this->getConfiguration("Numero Telephone", "+261..."))
             ->add('email', EmailType::class, $this->getConfiguration("email", "Adresse email..."))
@@ -46,7 +46,7 @@ class ProfileType extends AbstractType
                 'class' => Departement::class,
                 'choice_label' => 'nomDepartement'
             ])
-            ->add('username', TextType::class, $this->getConfiguration("Username", "Surnom"));
+            ->add('username', TextType::class, $this->getConfiguration("Nom d'utilisateur", "Surnom"));
     }
 
     public function configureOptions(OptionsResolver $resolver)
