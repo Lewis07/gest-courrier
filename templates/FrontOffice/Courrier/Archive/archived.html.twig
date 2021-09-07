@@ -30,32 +30,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for archived_courrier in archived_courriers %}
-                        <tr>
-                            <td>{{ archived_courrier.user.email }}</td>
-                            <td class="{{ archived_courrier.courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
-                                {{ archived_courrier.courrier.objetCourrier }}
-                            </td>
-                            <td>
-                                <!-- <a href="">
-                                    <i class="fas fa-share-alt text-info"></i>
-                                </a> -->
-{#<a href="{{ path('courrier_archived_show',{id:archived_courrier.id})}}">
-    <i class="fas fa-eye"></i>
-</a>#}
-<a href="{{ path('courrier_delete_trash',{id:archived_courrier.id})}}"
-   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
-    <i class="fas fa-trash text-danger"></i>
-</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr align="center">
-                            <td colspan="3">
-                                Aucun courrier archivé
-                            </td>
-                        </tr>
-                    {% endfor %}
+                        {% for archived_courrier in archived_courriers %}
+                            <tr>
+                                <td>{{ archived_courrier.user.email }}</td>
+                                <td class="{{ archived_courrier.courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
+                                    {{ archived_courrier.courrier.objetCourrier }}
+                                </td>
+                                <td>
+                                    <a href="{{ path('courrier_delete_trash_archived',{id:archived_courrier.id})}}"
+                                       onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                        <i class="fas fa-trash text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr align="center" class="d-none">
+                                <td colspan="3">
+                                    Aucun courrier archivé
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

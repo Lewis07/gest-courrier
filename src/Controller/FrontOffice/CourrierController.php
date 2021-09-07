@@ -325,7 +325,7 @@ class CourrierController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $archived_courriers = $this->courrierArchiveRepository->findBy(['user' => $user_id]);
+            $archived_courriers = $this->courrierArchiveRepository->findBy(['user' => $user_id,'isInTrashed' => 0]);
         }
 
         return $this->render('FrontOffice/Courrier/Archive/archived.html.twig',

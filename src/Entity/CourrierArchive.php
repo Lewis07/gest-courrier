@@ -29,6 +29,11 @@ class CourrierArchive
      */
     private $courrier;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isInTrashed = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +59,18 @@ class CourrierArchive
     public function setCourrier(?Courrier $courrier): self
     {
         $this->courrier = $courrier;
+
+        return $this;
+    }
+
+    public function getIsInTrashed(): ?bool
+    {
+        return $this->isInTrashed;
+    }
+
+    public function setIsInTrashed(bool $isInTrashed): self
+    {
+        $this->isInTrashed = $isInTrashed;
 
         return $this;
     }
