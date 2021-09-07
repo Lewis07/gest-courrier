@@ -108,7 +108,7 @@ class PartageCourrierController extends AbstractController
     }
 
     /**
-     * Suppression du courrier vers corbeille
+     * Suppression du courrier partage vers corbeille
      * @Route("/{id}/delete-to-trash-partage", name="courrier_delete_trash_share")
      * @param Courrier $courrier
      * @param Request $request
@@ -128,5 +128,4 @@ class PartageCourrierController extends AbstractController
 
         return $this->redirectToRoute('partage_courrier_index');
     }
-
 }
