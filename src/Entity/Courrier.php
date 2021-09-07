@@ -95,6 +95,11 @@ class Courrier
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $reference;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isShared = 0;
     
     public function __construct()
     {
@@ -301,6 +306,18 @@ class Courrier
     public function setPriorite(string $priorite): self
     {
         $this->priorite = $priorite;
+
+        return $this;
+    }
+
+    public function getIsShared(): ?bool
+    {
+        return $this->isShared;
+    }
+
+    public function setIsShared(?bool $isShared): self
+    {
+        $this->isShared = $isShared;
 
         return $this;
     }

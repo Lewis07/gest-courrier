@@ -27,9 +27,9 @@ class CourrierType extends AbstractType
             ->add('priorite', ChoiceType::class, [
                 'label' => 'Priorité ',
                     'choices'  => [
-                        'Normale' => null,
-                        'Urgent' => true,
-                        'Très urgent' => false,
+                        'Normale' => 1,
+                        'Urgent' => 2,
+                        'Très urgent' => 3,
                     ],
                 // 'expanded' => false,
                 // 'multiple' => false,

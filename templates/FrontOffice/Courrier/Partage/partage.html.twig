@@ -25,28 +25,32 @@
                     <tr>
                         <th>Recepteur</th>
                         <th>Objet</th>
+                        <th>Priorité</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for partage_courrier in partage_courriers %}
-                        {% for recepteur in partage_courrier.sharer %}
-                            <tr>
-                                <td>{{ recepteur.username }}</td>
-                                <td>
-                                      
-                                </td>
-                                <td>
-<a href="#">
-    <i class="fas fa-eye"></i>
-</a>
-                                    <a href="{{ path('courrier_delete_trash',{id:partage_courrier.id})}}"
-                                       onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
-                                        <i class="fas fa-trash text-danger"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        {% set partage_courrier_priorite = partage_courrier.priorite  %}
+                        <tr>
+                            <td>{{ partage_courrier.recipient.username }}</td>
+                            <td>{{ partage_courrier.objetCourrier }}</td>
+                            <td>
+                                {% if partage_courrier_priorite == 1 %}
+                                    <span class="badge badge-success">Normale</span>
+                                {% elseif partage_courrier_priorite == 2 %}
+                                    <span class="badge badge-warning">Urgent</span>
+                                {% elseif partage_courrier_priorite == 3 %}
+                                    <span class="badge badge-danger">Très urgent</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('courrier_delete_trash_share',{id:partage_courrier.id}) }}"
+                                   onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                    <i class="fas fa-trash text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
                     {% else %}
                         <tr align="center">
                             <td colspan="3">
