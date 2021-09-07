@@ -30,8 +30,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for archived_courrier in archived_courriers %}
-                        {% if archived_courrier.courrier.isInTrashed == 0 %}
+                        {% for archived_courrier in archived_courriers %}
                             <tr>
                                 <td>{{ archived_courrier.user.email }}</td>
                                 <td class="{{ archived_courrier.courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
@@ -45,13 +44,12 @@
                                 </td>
                             </tr>
                         {% else %}
-                            <tr align="center">
+                            <tr align="center" class="d-none">
                                 <td colspan="3">
                                     Aucun courrier archivé
                                 </td>
                             </tr>
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
