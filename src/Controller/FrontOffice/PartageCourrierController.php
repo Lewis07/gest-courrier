@@ -82,6 +82,19 @@ class PartageCourrierController extends AbstractController
 
             $this->em->persist($partage_courrier);
             $this->em->persist($courrier);
+
+            $this->em->flush();
+
+            $save_courrier = new Courrier();
+            $save_courrier->setSender($courrier->getSender());
+            $save_courrier->setRecipient($courrier->getRecipient());
+            $save_courrier->setDateEnvoie(new \Datetime());
+            $save_courrier->setTypeCourrier($courrier->getTypeCourrier());
+            $save_courrier->setPriorite($courrier->getPriorite());
+            $save_courrier->setObjetCourrier($courrier->getObjetCourrier());
+            $save_courrier->setMessage($courrier->getMessage());
+
+            $this->em->persist($save_courrier);
             $this->em->flush();
 
             $this->addFlash("success", "message envoyé avec succès");
