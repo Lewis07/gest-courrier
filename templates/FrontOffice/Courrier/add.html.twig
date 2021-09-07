@@ -15,7 +15,7 @@
                                     <a href="javascript:void(0);">Gestion de Courrier</a>
                                 </li>
                                 <li class="breadcrumb-item">Courrier</li>
-                                <li class="breadcrumb-item active">Demande de validation</li>
+                                <li class="breadcrumb-item active">Nouveau</li>
                             </ol>
                         </div><!--end col-->
                     </div><!--end row-->
@@ -27,11 +27,10 @@
                 {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
                     {{ form_row(form.recipient) }}
                     {{ form_row(form.typeCourrier) }}
-
+                    {{ form_row(form.priorite) }}
                     {% if app.request.attributes.get('_route') == "courrier_new" %}
                         {{ form_row(form.objetCourrier) }}
                     {% endif %}
-
                     {{ form_row(form.message) }}
                     {{ form_row(form.fichier) }}
                     <div class="d-flex">
