@@ -47,7 +47,14 @@
                     <span class="font-weight-bold">Type du courrier :</span>
                     <span>{{ request_courrier is defined ? request_courrier.typeCourrier }}</span>
                 </div>
-                <div class="mt-4">
+                {% if request_courrier.fichier is defined %}
+                    <div class="mb-2 {{ request_courrier.fichier is null ? 'd-none' : '' }}">
+                        <span class="font-weight-bold">
+                            <a href="{{ asset('uploads/courriers/' ~ request_courrier.fichier ) }}">Voir le courrier</a>
+                        </span>
+                    </div>
+                {% endif %}
+                <div class="mt-4 mb-2">
                     <span class="font-weight-bold">Message :</span>
                     <span>{{ request_courrier is defined ? request_courrier.message|raw }}</span>
                 </div>

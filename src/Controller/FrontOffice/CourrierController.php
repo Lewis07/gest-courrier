@@ -222,6 +222,7 @@ class CourrierController extends AbstractController
         if($form->isSubmitted() && $form->isValid() ){
             $courrier->setSender($this->getUser());
             $courrier->setObjetCourrier("Demande de validation de courrier");
+            $this->uploadFileService->uploadFile($form, $courrier, "fichier", "upload_images_courriers_directory");
 
             $this->em->persist($courrier);
             $this->em->flush();

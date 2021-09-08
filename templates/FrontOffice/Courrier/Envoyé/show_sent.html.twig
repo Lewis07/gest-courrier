@@ -25,8 +25,8 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="mb-2">
-                    <span class="font-weight-bold">Recepteur :</span>
-                    <span>{{ sent_courrier is defined ? sent_courrier.recipient.email : "" }}</span>
+                    <span class="font-weight-bold">Envoyeur :</span>
+                    <span>{{ sent_courrier is defined ? sent_courrier.sender.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Recepteur :</span>
@@ -46,18 +46,14 @@
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
                     <span>{{ sent_courrier is defined ? sent_courrier.typeCourrier }}</span>
-                    <a href="{{ asset('uploads/courriers/' ~ sent_courrier.fichier ) }}">Voir le fichier</a>
                 </div>
-
-{#                {% if sent_courrier.fichier is defined %}#}
-{#                    <div class="mb-2 {{ sent_courrier.fichier is null ? 'd-none' : '' }}">#}
-{#                        <span class="font-weight-bold">Voir le courrier :</span>#}
-{#                        <span>#}
-{#                            <a href="{{ asset('uploads/courriers/' ~ sent_courrier.fichier ) }}">Voir le fichier</a>#}
-{#                        </span>#}
-{#                    </div>#}
-{#                {% endif %}#}
-
+                {% if sent_courrier.fichier is defined %}
+                    <div class="mb-2 {{ sent_courrier.fichier is null ? 'd-none' : '' }}">
+                        <span class="font-weight-bold">
+                            <a href="{{ asset('uploads/courriers/' ~ sent_courrier.fichier ) }}">Voir le courrier</a>
+                        </span>
+                    </div>
+                {% endif %}
                 <div class="mt-4">
                     <span class="font-weight-bold">Message :</span>
                     <span>{{ sent_courrier is defined ? sent_courrier.message|raw }}</span>
