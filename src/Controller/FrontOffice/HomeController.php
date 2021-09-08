@@ -31,7 +31,7 @@ class HomeController extends AbstractController
             $courriers_arrive = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0]);
             $count_courrier_arrive = count($courriers_arrive);
 
-            $courriers_depart = $this->courrierRepository->findBy(['sender' => $user_id, 'isInTrashed' => 0]);
+            $courriers_depart = $this->courrierRepository->findBy(['sender' => $user_id, 'isInTrashed' => 0, 'isArchived' => 0]);
             $count_courrier_depart = count($courriers_depart);
 
             $courriers_archive = $this->courrierRepository->findBy(['sender' => $user_id, 'isArchived' => 1, 'isInTrashed' => 0]);
