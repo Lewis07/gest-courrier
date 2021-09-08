@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Courrier;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +29,14 @@ class ValidationCourrierType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
+            ])
+            ->add('priorite', ChoiceType::class, [
+                'label' => 'Priorité ',
+                'choices'  => [
+                    'Normale' => 1,
+                    'Urgent' => 2,
+                    'Très urgent' => 3,
+                ],
             ])
             ->add('fichier',FileType::class,[
                 'label' => 'Fichier',

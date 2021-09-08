@@ -273,17 +273,18 @@ class CourrierController extends AbstractController
 
     /**
      * Voir le courrier à valider
-     * @Route("/courrier-valide/voir", name="courrier_request_show")
+     * @Route("/{id}/courrier-valide/voir", name="courrier_request_show")
      * @return Response
      */
-    public function showMailRequest(): Response
+    public function showMailRequest($id): Response
     {
         if ($this->getUser()){
             $user_id = $this->getUser()->getId();
         }
 
         if (!empty($user_id)){
-            $request_courrier = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
+            // $request_courrier = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
+             $request_courrier = $this->courrierRepository->findOneBy(['id' => $id]);
         }
 
         return $this->render('FrontOffice/Courrier/Validation/show_request_validate.html.twig', compact('request_courrier'));

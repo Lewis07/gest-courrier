@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $courriers_arrive = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0]);
+            $courriers_arrive = $this->courrierRepository->findBy(['recipient' => $user_id, 'isInTrashed' => 0, 'isArchived' => 0]);
             $count_courrier_arrive = count($courriers_arrive);
 
             $courriers_depart = $this->courrierRepository->findBy(['sender' => $user_id, 'isInTrashed' => 0, 'isArchived' => 0]);
