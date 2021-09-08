@@ -4,6 +4,7 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\User;
 use App\Form\RoleUserType;
+use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +21,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminAccountUserController extends AbstractController
 {
     private $em;
+    private $roleRepository;
 
     /**
      * AdminAccountUserController constructor.
      * @param EntityManagerInterface $em
+     * @param RoleRepository $roleRepository
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, RoleRepository $roleRepository)
     {
         $this->em = $em;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -53,10 +57,26 @@ class AdminAccountUserController extends AbstractController
      */
     public function edit(Request $request,User $user, UserPasswordEncoderInterface $encoder)
     {
+        $userRoles = $user->getRoles();
         $form = $this->createForm(RoleUserType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid() ){
+            $role_id = $form->get("role")->getData()->getId();
+
+            if ($role_id) {
+                $role_title = $this->roleRepository->find($role_id)->getTitreRole();
+            }
+
+            if (in_array($role_title, $userRoles)) {
+                $this->addFlash("danger","This user has already this role");
+                return $this->redirectToRoute('admin_user_index');
+            }
+
+            array_push($userRoles,$role_title);
+            $user->setRoles($userRoles);
+
+//            $role = ucfirst(strtolower(str_replace("ROLE_","", $role_title)));
             $this->em->flush();
             
             $this->addFlash(
