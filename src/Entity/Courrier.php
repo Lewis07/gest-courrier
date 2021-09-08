@@ -40,11 +40,6 @@ class Courrier
     private $message;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $typeCourrier;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isValid = 0;
@@ -100,6 +95,12 @@ class Courrier
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isShared = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeCourrier::class, inversedBy="courriers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $typeCourrier;
     
     public function __construct()
     {
@@ -144,18 +145,6 @@ class Courrier
     public function setMessage(string $message): self
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getTypeCourrier(): ?string
-    {
-        return $this->typeCourrier;
-    }
-
-    public function setTypeCourrier(string $typeCourrier): self
-    {
-        $this->typeCourrier = $typeCourrier;
 
         return $this;
     }
@@ -318,6 +307,18 @@ class Courrier
     public function setIsShared(?bool $isShared): self
     {
         $this->isShared = $isShared;
+
+        return $this;
+    }
+
+    public function getTypeCourrier(): ?TypeCourrier
+    {
+        return $this->typeCourrier;
+    }
+
+    public function setTypeCourrier(?TypeCourrier $typeCourrier): self
+    {
+        $this->typeCourrier = $typeCourrier;
 
         return $this;
     }

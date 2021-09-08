@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\TypeCourrier;
 use App\Entity\User;
 use App\Entity\Courrier;
 use Symfony\Component\Form\AbstractType;
@@ -34,8 +35,10 @@ class CourrierType extends AbstractType
                 // 'expanded' => false,
                 // 'multiple' => false,
             ])
-            ->add('typeCourrier',TextType::class,[
-                'label' => 'Type de courrier'
+            ->add('typeCourrier',EntityType::class,[
+                'label' => 'Type de courrier',
+                'class' => TypeCourrier::class,
+                'choice_label' => 'libelleTypeCourrier'
             ])
             ->add('objetCourrier',TextType::class,[
                 'label' => 'Objet'

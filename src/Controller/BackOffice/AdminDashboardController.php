@@ -8,6 +8,7 @@ use App\Repository\DirectionRepository;
 use App\Repository\DossierRepository;
 use App\Repository\FonctionRepository;
 use App\Repository\RoleRepository;
+use App\Repository\TypeCourrierRepository;
 use App\Repository\TypeDossierRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +28,7 @@ class AdminDashboardController extends AbstractController
      * @param DepartementRepository $departementRepository
      * @param FonctionRepository $fonctionRepository
      * @param TypeDossierRepository $typeDossierRepository
+     * @param TypeCourrierRepository $typeCourrierRepository
      * @return Response
      */
     public function index(CourrierRepository $courrierRepository,
@@ -36,7 +38,8 @@ class AdminDashboardController extends AbstractController
                           RoleRepository $roleRepository,
                           DepartementRepository $departementRepository,
                           FonctionRepository $fonctionRepository,
-                          TypeDossierRepository $typeDossierRepository): Response
+                          TypeDossierRepository $typeDossierRepository,
+                          TypeCourrierRepository $typeCourrierRepository): Response
     {
 //        if(!$this->getUser()){
 //            return $this->redirectToRoute('app_login');
@@ -50,11 +53,12 @@ class AdminDashboardController extends AbstractController
         $roles = count($roleRepository->findAll());
         $departements = count($departementRepository->findAll());
         $fonctions = count($fonctionRepository->findAll());
+        $types_courriers = count($typeCourrierRepository->findAll());
 
         return $this->render('BackOffice/Dashboard/index.html.twig',
                             compact('users','courriers','directions',
                                     'directions','dossiers','roles','departements',
-                                    'fonctions','types_dossiers')
+                                    'fonctions','types_dossiers','types_courriers')
         );
     }
 }

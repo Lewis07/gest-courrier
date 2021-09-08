@@ -1,5 +1,5 @@
 {% extends "base_admin.html.twig" %}
-{% block title %}{{ parent() }} Modification du type de courrier {% endblock %}
+{% block title %}{{ parent() }} Modification du département {% endblock %}
 
 {% block body %}
     {% include 'partials/header.html.twig' %}
@@ -9,12 +9,12 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">Types de courriers</h4>
+                            <h4 class="page-title">Types de dossiers</h4>
                             <ol class="breadcrumb pt-3 d-flex align-items-center">
                                 <li class="breadcrumb-item">
                                     <a href="javascript:void(0);">Gestion de Courrier</a>
                                 </li>
-                                <li class="breadcrumb-item">Type de courrier</li>
+                                <li class="breadcrumb-item">Type de dossier</li>
                                 <li class="breadcrumb-item active">Modification</li>
                             </ol>
                         </div><!--end col-->
@@ -28,7 +28,7 @@
                 {{ form_widget(form) }}
                 <div class="d-flex">
                     <button class="btn btn-success mx-2 rounded-0">Modifier</button>
-                    <a href="{{ path('admin_type_courrier_index') }}"
+                    <a href="{{ path('admin_type_dossier_index') }}"
                        class="btn btn-warning rounded-0">
                         Retourner
                     </a>
