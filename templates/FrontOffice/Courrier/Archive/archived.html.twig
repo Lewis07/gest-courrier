@@ -33,7 +33,7 @@
                     <tbody>
                         {% for archived_courrier in archived_courriers %}
                             <tr>
-                                <td>{{ archived_courrier.user.email }}</td>
+                                <td>{{ archived_courrier.user.username }}</td>
                                 <td class="{{ archived_courrier.courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                     {{ archived_courrier.courrier.objetCourrier }}
                                 </td>
