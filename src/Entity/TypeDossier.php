@@ -30,7 +30,7 @@ class TypeDossier
     private $libelleTypeDossier;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="typDos")
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="typDos", cascade={"persist","remove"})
      */
     private $dossiers;
 
