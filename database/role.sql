@@ -1,0 +1,4 @@
+INSERT INTO role (id, titre_role) VALUES
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_RESPONSABLE'),
+(3, 'ROLE_DIRECTEUR');
