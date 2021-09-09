@@ -94,7 +94,13 @@ class PartageCourrierController extends AbstractController
             $save_courrier->setObjetCourrier($courrier->getObjetCourrier());
             $save_courrier->setMessage($courrier->getMessage());
 
+            $_courrier_saved_id = $courrier->getId();
+            $update_ref_courrier = $this->courrierRepository->find($_courrier_saved_id);
+            $reference = "CR".$_courrier_saved_id;
+            $update_ref_courrier->setReference($reference);
+            $this->em->persist($update_ref_courrier);
             $this->em->persist($save_courrier);
+
             $this->em->flush();
 
             $this->addFlash("success", "message envoyé avec succès");
