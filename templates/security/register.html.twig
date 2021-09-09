@@ -9,7 +9,7 @@
             <h4>Inscription d'un utilisateur</h4>
             {{ form_start(form) }}
             <div>
-                <img src="{{ asset('img/no-image.png') }}" class="avatar" alt="avatar">
+                <img src="{{ asset('img/no-image.png') }}" class="avatar avatar-preview" alt="avatar">
 {#                <h6>Mettez un photo...</h6>#}
 {#                <input type="file" class="text-center center-block file-upload">#}
                 <div class="row">
@@ -45,5 +45,8 @@
             {{ form_end(form) }}
         </div>
     </div>
-
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/preview-upload.js') }}"></script>
 {% endblock %}

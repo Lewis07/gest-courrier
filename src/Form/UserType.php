@@ -55,7 +55,10 @@ class UserType extends AbstractType
             ->add('picture',FileType::class,[
                 'label' => 'Mettez un photo...',
                 'required' => false,
-                'mapped' => false
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'image-preview'
+                ]
             ])
 //            ->add('password',PasswordType::class, $this->getConfiguration("Mot de passe", "Mot de passe..."))
             ->add('password',PasswordType::class, [
