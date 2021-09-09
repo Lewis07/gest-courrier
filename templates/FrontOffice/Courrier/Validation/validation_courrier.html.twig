@@ -30,6 +30,7 @@
                     <thead>
                     <tr>
                         <th>Recepteur</th>
+                        <th>Réference</th>
                         <th>Objet</th>
                         <th>Validé</th>
                         <th>Actions</th>
@@ -37,8 +38,19 @@
                     </thead>
                     <tbody>
                     {% for validation_courrier in validation_courriers %}
+                          {#{% set priorite = validation_courrier.priorite %} #}
                         <tr>
                             <td>{{ validation_courrier.recipient.username }}</td>
+                            <td>{{ validation_courrier.reference }}</td>
+                            {#<td>
+                                    {% if priorite == 1 %}
+                                        <span class="badge badge-success">Normale</span>
+                                    {% elseif priorite == 2 %}
+                                        <span class="badge badge-warning">Urgent</span>
+                                    {% elseif priorite == 3 %}
+                                        <span class="badge badge-danger">Très urgent</span>
+                                    {% endif %}
+                                </td>#}
                             <td class="{{ validation_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                 {{ validation_courrier.objetCourrier }}
                             </td>

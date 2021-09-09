@@ -51,11 +51,11 @@
                             </td>
                            
                             <td class="d-flex align-items-center">
-                                {% if is_granted("ROLE_DIRECTEUR") %}
+                                {#{% if is_granted("ROLE_DIRECTEUR") %}#}
                                     <a href="{{ url('valide_request',{id:received_courrier.id}) }}" class="px-1">
                                         <i class="fas fa-check-circle text-success"></i>
                                     </a>
-                                {% endif %}
+                                {#{% endif %}#}
                                 <a href="{{ url('courrier_share_user',{courrier_id:received_courrier.id}) }}">
                                     <i class="fas fa-share-alt text-info"></i>
                                 </a>
@@ -64,11 +64,11 @@
                                         <i class="fas fa-archive text-primary"></i>
                                     </button>
                                 </form>
-                                {% if is_granted("ROLE_DIRECTEUR") %}
+                                {#{% if is_granted("ROLE_DIRECTEUR") %}#}
                                     <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}" class="px-1">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                {% endif %}
+                                {#{% endif %}#}
                                 <a href="{{ path('courrier_delete_trash_received',{id:received_courrier.id})}}"
                                    onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                     <i class="fas fa-trash text-danger"></i>

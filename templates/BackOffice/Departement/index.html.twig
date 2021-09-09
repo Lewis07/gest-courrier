@@ -42,11 +42,11 @@
                             <td>{{ departement.direction.nomDirection }}</td>
                             <td>
                                 <a href="{{ path('admin_departement_edit',{id:departement.id})}}">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit text-success"></i>
                                 </a>
                                 <a href="{{ path('admin_departement_delete',{id:departement.id})}}"
                                    onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
-                                    <i class="fas fa-trash"></i>
+                                   <i class="fas fa-trash text-danger"></i>
                                 </a>
                             </td>
                         </tr>
