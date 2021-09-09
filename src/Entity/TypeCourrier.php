@@ -30,7 +30,7 @@ class TypeCourrier
     private $libelleTypeCourrier;
 
     /**
-     * @ORM\OneToMany(targetEntity=Courrier::class, mappedBy="typeCourrier")
+     * @ORM\OneToMany(targetEntity=Courrier::class, mappedBy="typeCourrier", cascade={"persist","remove"})
      */
     private $courriers;
 
