@@ -31,6 +31,7 @@
                         <th>Adresse</th>
                         <th>Fonction</th>
                         <th>Département</th>
+                        <th>Role</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -46,6 +47,12 @@
                             <td>{{ user.adresse }}</td>
                             <td>{{ user.fonction.nomFonction }}</td>
                             <td>{{ user.departement.nomDepartement }}</td>
+                            <td>
+                                {% for role in user.roles %}
+                                    {{ role == "ROLE_USER" ? "Utilisateur" : role|replace({'ROLE_':''})|title }}
+                                    {{ not loop.last ? "," : "" }}
+                                {% endfor %}
+                            </td>
                             <td>
                                 <a href="{{ path('admin_user_edit',{id:user.id}) }}">
                                     <i class="fas fa-edit"></i>

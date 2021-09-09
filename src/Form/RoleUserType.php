@@ -17,7 +17,9 @@ class RoleUserType extends AbstractType
             ->add('role',EntityType::class,[
                 'class' => Role::class,
                 'choice_label' => 'titreRoleFormatted',
-                'mapped' => false
+                'mapped' => false,
+                /*'expanded' => true,
+                'multiple' => true*/
             ])
         ;
     }
