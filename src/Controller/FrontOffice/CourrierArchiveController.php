@@ -54,4 +54,33 @@ class CourrierArchiveController extends AbstractController
 
         return $this->redirectToRoute('courrier_archived');
     }
+
+    /**
+     * Voir les courrier archiver
+     * @Route("/courrier-archiver/voir", name="show_courrier_archived")
+     * @return Response
+     */
+    public function showArchived(): Response
+    {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('app_login');
+        }
+
+        $user_id = $this->getUser()->getId();
+        dd($user_id);
+
+        if (!empty($user_id)){
+            $archived_courrier = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
+
+            dd($archived_courrier);
+        }
+
+        $archived_courrier->setIsRead(true);
+        $this->em->persist($archived_courrier);
+        $this->em->flush();
+
+        return $this->render('FrontOffice/Courrier/Archive/show_archived.html.twig',
+                                compact('received_courrier')
+        );
+    }
 }

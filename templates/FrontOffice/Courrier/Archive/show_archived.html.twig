@@ -1,5 +1,5 @@
 {% extends "base_admin.html.twig" %}
-{% block title %}{{ parent() }} Détail du courrier {% endblock %}
+{% block title %}{{ parent() }} Détail du courrier Archiver {% endblock %}
 
 {% block body %}
     {% include 'partials/header.html.twig' %}
@@ -26,30 +26,30 @@
             <div class="col-sm-4">
                 <div class="mb-2">
                     <span class="font-weight-bold">Recepteur :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.recipient.email : "" }}</span>
+                    <span>{{ archived_courrier is defined ? archived_courrier.recipient.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Emetteur :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.sender.email : "" }}</span>
+                    <span>{{ archived_courrier is defined ? archived_courrier.sender.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Objet :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.objetCourrier : "" }}</span>
+                    <span>{{ archived_courrier is defined ? archived_courrier.objetCourrier : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Date d'envoi :</span>
                     <span>
-                        {{ received_courrier is defined ? received_courrier.dateEnvoie|date('d/m/Y') : "" }} à
-                        {{ received_courrier is defined ? received_courrier.dateEnvoie|date('H:i') : "" }}
+                        {{ archived_courrier is defined ? archived_courrier.dateEnvoie|date('d/m/Y') : "" }} à
+                        {{ archived_courrier is defined ? archived_courrier.dateEnvoie|date('H:i') : "" }}
                     </span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
-                    <span>{{ received_courrier.typeCourrier is defined ? received_courrier.typeCourrier.libelleTypeCourrier }}</span>
+                    <span>{{ archived_courrier is defined ? archived_courrier.typeCourrier }}</span>
                 </div>
                 <div class="mt-4">
                     <span class="font-weight-bold">Message :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.message|raw }}</span>
+                    <span>{{ archived_courrier is defined ? archived_courrier.message|raw }}</span>
                 </div>
             </div>
         </div>

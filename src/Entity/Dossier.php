@@ -18,41 +18,44 @@ class Dossier
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity=Courrier::class, inversedBy="dossiers")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $NomDossier;
+    private $courrier;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=TypeDossier::class, inversedBy="dossiers")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Description;
-
+    private $typDos;
+    
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomDossier(): ?string
+    public function getCourrier(): ?Courrier
     {
-        return $this->NomDossier;
+        return $this->courrier;
     }
 
-    public function setNomDossier(string $NomDossier): self
+    public function setCourrier(?Courrier $courrier): self
     {
-        $this->NomDossier = $NomDossier;
+        $this->courrier = $courrier;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getTypDos(): ?TypeDossier
     {
-        return $this->Description;
+        return $this->typDos;
     }
 
-    public function setDescription(string $Description): self
+    public function setTypDos(?TypeDossier $typDos): self
     {
-        $this->Description = $Description;
+        $this->typDos = $typDos;
 
         return $this;
     }
+    
 }

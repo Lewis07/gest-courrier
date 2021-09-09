@@ -24,6 +24,7 @@
                     <thead>
                     <tr>
                         <th>Recepteur</th>
+                        <th>Réference</th>
                         <th>Objet</th>
                         <th>Priorité</th>
                         <th>Actions</th>
@@ -34,6 +35,7 @@
                         {% set partage_courrier_priorite = partage_courrier.priorite  %}
                         <tr>
                             <td>{{ partage_courrier.recipient.username }}</td>
+                            <td>{{ partage_courrier.reference }}</td>
                             <td>{{ partage_courrier.objetCourrier }}</td>
                             <td>
                                 {% if partage_courrier_priorite == 1 %}

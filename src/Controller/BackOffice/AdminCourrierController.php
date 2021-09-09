@@ -8,15 +8,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/Courrier")
+ * @Route("/admin/courrier")
  */
 class AdminCourrierController extends AbstractController
 {
     /**
      * @Route("/", name="admin_courrier_index")
      */
-    public function index(): Response
+    public function index(CourrierRepository $courrierRepository): Response
     {
-        return $this->render('BackOffice/Courrier/index.html.twig');
+        $courriers = $courrierRepository->findAll();
+        
+        return $this->render('BackOffice/Courrier/index.html.twig', compact('courriers'));
     }
 }

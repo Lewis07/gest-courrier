@@ -101,11 +101,17 @@ class Courrier
      * @ORM\JoinColumn(nullable=false)
      */
     private $typeCourrier;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="courrier")
+     */
+    private $dossiers;
     
     public function __construct()
     {
         $this->dateEnvoie= new \DateTime();
         $this->courrierArchives = new ArrayCollection();
+        $this->dossiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -319,6 +325,36 @@ class Courrier
     public function setTypeCourrier(?TypeCourrier $typeCourrier): self
     {
         $this->typeCourrier = $typeCourrier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dossier[]
+     */
+    public function getDossiers(): Collection
+    {
+        return $this->dossiers;
+    }
+
+    public function addDossier(Dossier $dossier): self
+    {
+        if (!$this->dossiers->contains($dossier)) {
+            $this->dossiers[] = $dossier;
+            $dossier->setCourrier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDossier(Dossier $dossier): self
+    {
+        if ($this->dossiers->removeElement($dossier)) {
+            // set the owning side to null (unless already changed)
+            if ($dossier->getCourrier() === $this) {
+                $dossier->setCourrier(null);
+            }
+        }
 
         return $this;
     }
