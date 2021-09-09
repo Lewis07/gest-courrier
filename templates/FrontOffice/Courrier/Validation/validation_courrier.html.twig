@@ -38,7 +38,7 @@
                     <tbody>
                     {% for validation_courrier in validation_courriers %}
                         <tr>
-                            <td>{{ validation_courrier.recipient.email }}</td>
+                            <td>{{ validation_courrier.recipient.username }}</td>
                             <td class="{{ validation_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                 {{ validation_courrier.objetCourrier }}
                             </td>
