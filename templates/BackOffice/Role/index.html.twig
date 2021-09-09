@@ -39,7 +39,7 @@
                         {% set titre = role.titreRole %}
                         <tr>
                             <td>{{ titre|replace({'ROLE_':''})|title }}</td>
-                            <td class="{{ titre == 'ROLE_ADMIN' ? 'd-none' : '' }}">
+                            <td class="{{ (titre == 'ROLE_ADMIN' or titre == 'ROLE_DIRECTEUR') ? 'd-none' : '' }}">
                                 <a href="{{ path('admin_role_edit',{id:role.id}) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>

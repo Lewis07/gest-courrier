@@ -37,6 +37,11 @@ class Role
         return $this->titreRole;
     }
 
+    public function getTitreRoleFormatted(): ?string
+    {
+        return  ucfirst(strtolower(str_replace("ROLE_","",$this->titreRole)));
+    }
+
     public function setTitreRole(string $titreRole): self
     {
         $this->titreRole = $titreRole;
