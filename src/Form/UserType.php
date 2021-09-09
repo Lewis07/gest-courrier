@@ -51,7 +51,7 @@ class UserType extends AbstractType
                 'class' => Departement::class,
                 'choice_label' => 'nomDepartement'
             ])
-            ->add('username',TextType::class, $this->getConfiguration("Nom d'utilisateur", "Surnom"))
+            ->add('username',TextType::class, $this->getConfiguration("Pseudo", "Pseudo"))
             ->add('picture',FileType::class,[
                 'label' => 'Mettez un photo...',
                 'required' => false,
