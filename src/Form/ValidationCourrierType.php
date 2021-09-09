@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Courrier;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,6 +22,11 @@ class ValidationCourrierType extends AbstractType
             ->add('recipient', EntityType::class, [
                 "class" => User::class,
                 "choice_label" => "email",
+                "query_builder" => function(EntityRepository $er){
+                    return $er->createQueryBuilder('u')
+                        ->andWhere('u.roles NOT LIKE :role')
+                        ->setParameter('role', '%"'.'ROLE_DIRECTEUR'.'"%');
+                }
             ])
             ->add('typeCourrier',TextType::class,[
                 'label' => 'Type de courrier'
