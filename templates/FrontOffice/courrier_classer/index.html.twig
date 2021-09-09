@@ -41,6 +41,12 @@
                                 <td>{{ courrier_classer.courrier.reference }}</td>
                                 <td>{{ courrier_classer.typDos.libelleTypeDossier }}</td>
                             </tr>
+                        {% else %}
+                            <tr align="center">
+                                <td colspan="3">
+                                    Aucun courrier classer
+                                </td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>

@@ -4,15 +4,16 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Courrier;
+use App\Entity\TypeCourrier;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ValidationCourrierType extends AbstractType
 {
@@ -28,8 +29,10 @@ class ValidationCourrierType extends AbstractType
                         ->setParameter('role', '%"'.'ROLE_DIRECTEUR'.'"%');
                 }
             ])
-            ->add('typeCourrier',TextType::class,[
-                'label' => 'Type de courrier'
+            ->add('typeCourrier',EntityType::class,[
+                'label' => 'Type de courrier',
+                'class' => TypeCourrier::class,
+                'choice_label' => 'libelleTypeCourrier'
             ])
             ->add('message', CKEditorType::class, [
                 'attr' => [
