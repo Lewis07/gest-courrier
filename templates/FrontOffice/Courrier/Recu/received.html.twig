@@ -47,9 +47,13 @@
                                     <span class="badge badge-danger">Très urgent</span>
                                 {% endif %}
                             </td>
+                           
                             <td class="d-flex align-items-center">
                                 <a href="{{ url('valide_request',{id:received_courrier.id}) }}" class="px-1">
                                     <i class="fas fa-check-circle text-success"></i>
+                                </a>
+                                <a href="{{ url('courrier_share_user',{courrier_id:received_courrier.id}) }}">
+                                    <i class="fas fa-share-alt text-info"></i>
                                 </a>
                                 <form action="{{ url('archived',{id:received_courrier.id}) }}" method="post">
                                     <button type="submit" class="px-1">
