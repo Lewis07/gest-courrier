@@ -67,7 +67,6 @@ class CourrierArchiveController extends AbstractController
         }
 
         $user_id = $this->getUser()->getId();
-        dd($user_id);
 
         if (!empty($user_id)){
             $archived_courrier = $this->courrierRepository->findOneBy(['recipient' => $user_id]);

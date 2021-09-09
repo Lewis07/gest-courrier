@@ -40,11 +40,11 @@
                             <td>{{ fonction.nomFonction }}</td>
                             <td>
                                 <a href="{{ path('admin_fonction_edit',{id:fonction.id})}}">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit text-success"></i>
                                 </a>
                                 <a href="{{ path('admin_fonction_delete',{id:fonction.id})}}"
                                    onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash text-danger"></i>
                                 </a>
                             </td>
                         </tr>

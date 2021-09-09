@@ -56,4 +56,14 @@ class CourrierClasserController extends AbstractController
            'form' => $form->createView()
        ]);
     }
+
+    /**
+     * Route("/{id}/delete", name"classer_delete")
+     */
+    public function delete(EntityManagerInterface $manager,Dossier $dossier)
+    {
+        $manager->remove($dossier);
+        $manager->flush();
+        return $this->redirectToRoute('courrier_classer');
+    }
 }
