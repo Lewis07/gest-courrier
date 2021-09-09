@@ -25,6 +25,7 @@
                     <thead>
                     <tr>
                         <th>Emetteur</th>
+                        <th>Réference</th>
                         <th>Objet</th>
                         <th>Priorité</th>
                         <th>Actions</th>
@@ -35,6 +36,7 @@
                         {% set priorite = received_courrier.priorite %}
                         <tr>
                             <td>{{ received_courrier.sender.username }}</td>
+                            <td>{{ received_courrier.reference }}</td>
                             <td class="{{ received_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                 {{ received_courrier.objetCourrier }}
                             </td>

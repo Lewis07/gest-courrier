@@ -129,9 +129,9 @@ class CourrierController extends AbstractController
             $received_courrier = $this->courrierRepository->findOneBy(['recipient' => $user_id,'isInTrashed' => 0]);
         }
 
-        // $received_courrier->setIsRead(true);
-        // $this->em->persist($received_courrier);
-        // $this->em->flush();
+        $received_courrier->setIsRead(true);
+        $this->em->persist($received_courrier);
+        $this->em->flush();
         return $this->render('FrontOffice/Courrier/Recu/show_received.html.twig',
                                 compact('received_courrier')
         );
