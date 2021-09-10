@@ -70,8 +70,6 @@ class CourrierClasserController extends AbstractController
         $manager->flush();
         return $this->redirectToRoute('courrier_classer');
     }
-<<<<<<< HEAD
-=======
 
         /**
      * Voir les courrier classer
@@ -99,5 +97,4 @@ class CourrierClasserController extends AbstractController
                                 compact('courrier_classer')
         );
     }
->>>>>>> 1a4cb70127ab340601794013687b063d7c2661b9
 }
