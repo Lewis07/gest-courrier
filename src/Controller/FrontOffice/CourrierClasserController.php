@@ -4,6 +4,7 @@ namespace App\Controller\FrontOffice;
 
 use App\Entity\Dossier;
 use App\Form\CourrierClasserType;
+use App\Repository\CourrierRepository;
 use App\Repository\DossierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,14 +18,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CourrierClasserController extends AbstractController
 {
     private $em;
+    private $courrierRepository;
 
     /**
      * CourrierClasserController constructor.
      * @param EntityManagerInterface $em
+     * @param CourrierRepository $courrierRepository
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, CourrierRepository $courrierRepository)
     {
         $this->em = $em;
+        $this->courrierRepository = $courrierRepository;
     }
     
     /**
@@ -33,7 +37,7 @@ class CourrierClasserController extends AbstractController
     public function index(DossierRepository $dossierRepository): Response
     {
         $courrier_classers = $dossierRepository->findAll();
-        return $this->render('FrontOffice/courrier_classer/index.html.twig', compact('courrier_classers'));
+        return $this->render('FrontOffice/Courrier/courrier_classer/index.html.twig', compact('courrier_classers'));
     }
 
     /**
@@ -52,7 +56,7 @@ class CourrierClasserController extends AbstractController
             return $this->redirectToRoute('courrier_classer');
         }
 
-       return $this->render('FrontOffice/courrier_classer/add.html.twig', [
+       return $this->render('FrontOffice/Courrier/courrier_classer/add.html.twig', [
            'form' => $form->createView()
        ]);
     }
@@ -81,12 +85,12 @@ class CourrierClasserController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $courrier_classers = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
+            $courrier_classer = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
 
         }
 
-        $courrier_classers->setIsRead(true);
-        $this->em->persist($archived_courrier);
+        $courrier_classer->setIsRead(true);
+        $this->em->persist($courrier_classer);
         $this->em->flush();
 
         return $this->render('FrontOffice/Courrier/courrier_classer/show_classer.html.twig',

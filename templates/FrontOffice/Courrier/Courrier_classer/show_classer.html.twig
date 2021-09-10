@@ -1,5 +1,5 @@
 {% extends "base_admin.html.twig" %}
-{% block title %}{{ parent() }} Détail du courrier classer{% endblock %}
+{% block title %}{{ parent() }} Détail du courrier classé{% endblock %}
 
 {% block body %}
     {% include 'partials/header.html.twig' %}
@@ -26,37 +26,37 @@
             <div class="col-sm-4">
                 <div class="mb-2">
                     <span class="font-weight-bold">Recepteur :</span>
-                    <span>{{ request_courrier is defined ? request_courrier.recipient.email : "" }}</span>
+                    <span>{{ courrier_classer.recipient is defined ? courrier_classer.recipient.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Emetteur :</span>
-                    <span>{{ request_courrier is defined ? request_courrier.sender.email : "" }}</span>
+                    <span>{{ courrier_classer.sender is defined ? courrier_classer.sender.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Objet :</span>
-                    <span>{{ request_courrier is defined ? request_courrier.objetCourrier : "" }}</span>
+                    <span>{{ courrier_classer.objetCourrier is defined ? courrier_classer.objetCourrier : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Date d'envoi :</span>
                     <span>
-                        {{ request_courrier is defined ? request_courrier.dateEnvoie|date('d/m/Y') : "" }} à
-                        {{ request_courrier is defined ? request_courrier.dateEnvoie|date('H:i') : "" }}
+                        {{ courrier_classer.dateEnvoie is defined ? courrier_classer.dateEnvoie|date('d/m/Y') : "" }} à
+                        {{ courrier_classer.dateEnvoie is defined ? courrier_classer.dateEnvoie|date('H:i') : "" }}
                     </span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
-                    <span>{{ request_courrier is defined ? request_courrier.typeCourrier.libelleTypeCourrier }}</span>
+                    <span>{{ courrier_classer.typeCourrier is defined ? courrier_classer.typeCourrier.libelleTypeCourrier }}</span>
                 </div>
-                {% if request_courrier.fichier is defined %}
-                    <div class="mb-2 {{ request_courrier.fichier is null ? 'd-none' : '' }}">
+                {% if courrier_classer.fichier is defined %}
+                    <div class="mb-2 {{ courrier_classer.fichier is null ? 'd-none' : '' }}">
                         <span class="font-weight-bold">
-                            <a href="{{ asset('uploads/courriers/' ~ request_courrier.fichier ) }}">Voir le courrier</a>
+                            <a href="{{ asset('uploads/courriers/' ~ courrier_classer.fichier ) }}">Voir le courrier</a>
                         </span>
                     </div>
                 {% endif %}
                 <div class="mt-4 mb-2">
                     <span class="font-weight-bold">Message :</span>
-                    <span>{{ request_courrier is defined ? request_courrier.message|raw }}</span>
+                    <span>{{ courrier_classer.message is defined ? courrier_classer.message|raw }}</span>
                 </div>
             </div>
         </div>
