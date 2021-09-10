@@ -116,6 +116,7 @@ class PartageCourrierController extends AbstractController
             $_courrier_saved_id = $courrier_to_share->getId();
             $reference = "CR".$_courrier_saved_id;
             $save_courrier->setReference($reference);
+            $save_courrier->setIsShared(true);
 
             $this->em->persist($save_courrier);
             $this->em->flush();
