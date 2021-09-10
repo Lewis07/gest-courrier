@@ -71,7 +71,6 @@ class CourrierArchiveController extends AbstractController
         if (!empty($user_id)){
             $archived_courrier = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
 
-            dd($archived_courrier);
         }
 
         $archived_courrier->setIsRead(true);
@@ -79,7 +78,7 @@ class CourrierArchiveController extends AbstractController
         $this->em->flush();
 
         return $this->render('FrontOffice/Courrier/Archive/show_archived.html.twig',
-                                compact('received_courrier')
+                                compact('archived_courrier')
         );
     }
 }

@@ -1,5 +1,5 @@
 {% extends "base_admin.html.twig" %}
-{% block title %}{{ parent() }} Détail du courrier Archiver {% endblock %}
+{% block title %}{{ parent() }} Détail du courrier classer{% endblock %}
 
 {% block body %}
     {% include 'partials/header.html.twig' %}
@@ -15,7 +15,7 @@
                                     <a href="javascript:void(0);">Gestion de Courrier</a>
                                 </li>
                                 <li class="breadcrumb-item">Courrier</li>
-                                <li class="breadcrumb-item active">Détail</li>
+                                <li class="breadcrumb-item active">Courrier classer</li>
                             </ol>
                         </div><!--end col-->
                     </div><!--end row-->
@@ -26,30 +26,37 @@
             <div class="col-sm-4">
                 <div class="mb-2">
                     <span class="font-weight-bold">Recepteur :</span>
-                    <span>{{ archived_courrier is defined ? archived_courrier.recipient.email : "" }}</span>
+                    <span>{{ request_courrier is defined ? request_courrier.recipient.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Emetteur :</span>
-                    <span>{{ archived_courrier is defined ? archived_courrier.sender.email : "" }}</span>
+                    <span>{{ request_courrier is defined ? request_courrier.sender.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Objet :</span>
-                    <span>{{ archived_courrier is defined ? archived_courrier.objetCourrier : "" }}</span>
+                    <span>{{ request_courrier is defined ? request_courrier.objetCourrier : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Date d'envoi :</span>
                     <span>
-                        {{ archived_courrier is defined ? archived_courrier.dateEnvoie|date('d/m/Y') : "" }} à
-                        {{ archived_courrier is defined ? archived_courrier.dateEnvoie|date('H:i') : "" }}
+                        {{ request_courrier is defined ? request_courrier.dateEnvoie|date('d/m/Y') : "" }} à
+                        {{ request_courrier is defined ? request_courrier.dateEnvoie|date('H:i') : "" }}
                     </span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
-                    <span>{{ archived_courrier.typeCourrier is defined ? archived_courrier.typeCourrier.libelleTypeCourrier }}</span>
+                    <span>{{ request_courrier is defined ? request_courrier.typeCourrier.libelleTypeCourrier }}</span>
                 </div>
-                <div class="mt-4">
+                {% if request_courrier.fichier is defined %}
+                    <div class="mb-2 {{ request_courrier.fichier is null ? 'd-none' : '' }}">
+                        <span class="font-weight-bold">
+                            <a href="{{ asset('uploads/courriers/' ~ request_courrier.fichier ) }}">Voir le courrier</a>
+                        </span>
+                    </div>
+                {% endif %}
+                <div class="mt-4 mb-2">
                     <span class="font-weight-bold">Message :</span>
-                    <span>{{ archived_courrier is defined ? archived_courrier.message|raw }}</span>
+                    <span>{{ request_courrier is defined ? request_courrier.message|raw }}</span>
                 </div>
             </div>
         </div>

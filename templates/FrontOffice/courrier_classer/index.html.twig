@@ -40,7 +40,10 @@
                             <tr>
                                 <td>{{ courrier_classer.courrier.reference }}</td>
                                 <td>{{ courrier_classer.typDos.libelleTypeDossier }}</td>
-                                <td class="d-flex align-items-center">
+                                <td>
+                                        <a href="{{ path('show_courrier_classed',{id:courrier_classer.id})}}">
+                                                <i class="fas fa-eye"></i>
+                                        </a>
                                         <a href="#"
                                         onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                          <i class="fas fa-trash text-danger"></i>

@@ -50,9 +50,9 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                        <a href="{{ path('show_courrier_archived',{id:archived_courrier.id})}}" class="px-1">
-                                                <i class="fas fa-eye"></i>
-                                        </a>
+                                    <a href="{{ path('show_courrier_archived',{id:archived_courrier.id})}}" class="px-1">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                     <a href="{{ path('courrier_delete_trash_archived',{id:archived_courrier.id})}}"
                                        onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                         <i class="fas fa-trash text-danger"></i>

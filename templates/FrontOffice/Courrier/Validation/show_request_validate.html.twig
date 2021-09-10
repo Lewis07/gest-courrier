@@ -45,7 +45,7 @@
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
-                    <span>{{ request_courrier is defined ? request_courrier.typeCourrier }}</span>
+                    <span>{{ request_courrier is defined ? request_courrier.typeCourrier.libelleTypeCourrier }}</span>
                 </div>
                 {% if request_courrier.fichier is defined %}
                     <div class="mb-2 {{ request_courrier.fichier is null ? 'd-none' : '' }}">
