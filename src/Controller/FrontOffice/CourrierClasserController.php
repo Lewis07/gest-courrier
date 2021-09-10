@@ -19,16 +19,20 @@ class CourrierClasserController extends AbstractController
 {
     private $em;
     private $courrierRepository;
+    private $courrierClasserRepository;
 
     /**
      * CourrierClasserController constructor.
      * @param EntityManagerInterface $em
      * @param CourrierRepository $courrierRepository
+     * @param DossierRepository $courrierClasserRepository
      */
-    public function __construct(EntityManagerInterface $em, CourrierRepository $courrierRepository)
+    public function __construct(EntityManagerInterface $em, CourrierRepository $courrierRepository,
+                                DossierRepository $courrierClasserRepository)
     {
         $this->em = $em;
         $this->courrierRepository = $courrierRepository;
+        $this->courrierClasserRepository = $courrierClasserRepository;
     }
     
     /**
@@ -74,6 +78,7 @@ class CourrierClasserController extends AbstractController
     /**
      * Voir les courrier classer
      * @Route("/{id}/courrier-classer/voir", name="show_courrier_classed")
+     * @param Dossier $courrier_classer
      * @return Response
      */
     public function showClasser($id): Response
@@ -82,12 +87,7 @@ class CourrierClasserController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $user_id = $this->getUser()->getId();
-
-        if (!empty($user_id)){
-            $courrier_classer = $this->courrierRepository->findOneBy(['recipient' => $user_id,'id' => $id]);
-
-        }
+        $courrier_classer = $this->courrierRepository->find($id);
 
         /*$courrier_classer->setIsRead(true);
         $this->em->persist($courrier_classer);
