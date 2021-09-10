@@ -7,6 +7,8 @@ use App\Entity\PartageCourrier;
 use App\Form\PartageCourrierType;
 use App\Repository\CourrierRepository;
 use App\Repository\PartageCourrierRepository;
+use App\Repository\TypeCourrierRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,19 +23,27 @@ class PartageCourrierController extends AbstractController
     private $em;
     private $partageCourrierRepository;
     private $courrierRepository;
+    private $typeCourrierRepository;
+    private $userRepository;
 
     /**
      * PartageCourrierController constructor.
      * @param EntityManagerInterface $em
      * @param PartageCourrierRepository $partageCourrierRepository
      * @param CourrierRepository $courrierRepository
+     * @param TypeCourrierRepository $typeCourrierRepository
+     * @param UserRepository $userRepository
+     * TypeCourrierRepository $typeCourrierRepository
      */
     public function __construct(EntityManagerInterface $em, PartageCourrierRepository $partageCourrierRepository,
-                                CourrierRepository $courrierRepository)
+                                CourrierRepository $courrierRepository, TypeCourrierRepository $typeCourrierRepository,
+                                UserRepository $userRepository)
     {
         $this->em = $em;
         $this->partageCourrierRepository = $partageCourrierRepository;
         $this->courrierRepository = $courrierRepository;
+        $this->typeCourrierRepository = $typeCourrierRepository;
+        $this->userRepository = $userRepository;
     }
     /**
      * @Route("/", name="partage_courrier_index")
@@ -70,14 +80,15 @@ class PartageCourrierController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid() ){
-            $_recipients = $form->get("recepteur_courrier_partage")->getData();
+            $recipients = $form->get("recepteur_courrier_partage")->getData();
             $partage_courrier->setSender($this->getUser());
 
-            foreach ($_recipients as $shared){
+            foreach ($recipients as $shared){
                 $partage_courrier->addSharer($shared);
             }
 
             $courrier = $this->courrierRepository->find($courrier_id);
+            $courrier_to_share = $courrier;
             $courrier->setIsShared(true);
 
             $this->em->persist($partage_courrier);
@@ -86,21 +97,27 @@ class PartageCourrierController extends AbstractController
             $this->em->flush();
 
             $save_courrier = new Courrier();
-            $save_courrier->setSender($courrier->getSender());
-            $save_courrier->setRecipient($courrier->getRecipient());
+            $save_courrier->setSender($courrier_to_share->getSender());
+            //$save_courrier->setRecipient($courrier_to_share->getRecipient());
+
+            $recepteur_id = $recipients[0]->getId();
+            $recepteur = $this->userRepository->find($recepteur_id);
+            $save_courrier->setRecipient($recepteur);
             $save_courrier->setDateEnvoie(new \Datetime());
+
+            $type_courrier_id = $courrier_to_share->getTypeCourrier()->getId();
+            $type_courrier = $this->typeCourrierRepository->find($type_courrier_id);
             $save_courrier->setTypeCourrier($courrier->getTypeCourrier());
-            $save_courrier->setPriorite($courrier->getPriorite());
-            $save_courrier->setObjetCourrier($courrier->getObjetCourrier());
-            $save_courrier->setMessage($courrier->getMessage());
 
-            $_courrier_saved_id = $courrier->getId();
-            $update_ref_courrier = $this->courrierRepository->find($_courrier_saved_id);
+            $save_courrier->setPriorite($courrier_to_share->getPriorite());
+            $save_courrier->setObjetCourrier($courrier_to_share->getObjetCourrier());
+            $save_courrier->setMessage($courrier_to_share->getMessage());
+
+            $_courrier_saved_id = $courrier_to_share->getId();
             $reference = "CR".$_courrier_saved_id;
-            $update_ref_courrier->setReference($reference);
-            $this->em->persist($update_ref_courrier);
-            $this->em->persist($save_courrier);
+            $save_courrier->setReference($reference);
 
+            $this->em->persist($save_courrier);
             $this->em->flush();
 
             $this->addFlash("success", "message envoyé avec succès");
