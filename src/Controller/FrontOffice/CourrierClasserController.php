@@ -71,12 +71,12 @@ class CourrierClasserController extends AbstractController
         return $this->redirectToRoute('courrier_classer');
     }
 
-        /**
+    /**
      * Voir les courrier classer
-     * @Route("/courrier-classer/voir", name="show_courrier_classed")
+     * @Route("/{id}/courrier-classer/voir", name="show_courrier_classed")
      * @return Response
      */
-    public function showClasser(): Response
+    public function showClasser($id): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
@@ -85,7 +85,7 @@ class CourrierClasserController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $courrier_classer = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
+            $courrier_classer = $this->courrierRepository->findOneBy(['recipient' => $user_id,'id' => $id]);
 
         }
 
