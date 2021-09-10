@@ -47,10 +47,14 @@
                                 {% endif %}
                             </td>
                             <td>
+                                <a href="#">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <a href="{{ path('courrier_delete_trash_share',{id:partage_courrier.id}) }}"
                                    onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                     <i class="fas fa-trash text-danger"></i>
-                                </a>
+                                </a>                            
+                                
                             </td>
                         </tr>
                     {% else %}
