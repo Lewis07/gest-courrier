@@ -89,9 +89,9 @@ class CourrierClasserController extends AbstractController
 
         }
 
-        $courrier_classer->setIsRead(true);
+        /*$courrier_classer->setIsRead(true);
         $this->em->persist($courrier_classer);
-        $this->em->flush();
+        $this->em->flush();*/
 
         return $this->render('FrontOffice/Courrier/courrier_classer/show_classer.html.twig',
                                 compact('courrier_classer')
