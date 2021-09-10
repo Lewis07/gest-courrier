@@ -65,29 +65,28 @@ class CourrierClasserController extends AbstractController
        ]);
     }
 
-    /**
-     * Route("/{id}/delete", name"classer_delete")
-     */
-    public function delete(EntityManagerInterface $manager,Dossier $dossier)
-    {
-        $manager->remove($dossier);
-        $manager->flush();
-        return $this->redirectToRoute('courrier_classer');
-    }
+//    /**
+//     * @Route("/{id}/delete", name"classer_delete")
+//     */
+//    public function delete(EntityManagerInterface $manager,Dossier $dossier)
+//    {
+//        $manager->remove($dossier);
+//        $manager->flush();
+//        return $this->redirectToRoute('courrier_classer');
+//    }
 
     /**
      * Voir les courrier classer
-     * @Route("/{id}/courrier-classer/voir", name="show_courrier_classed")
-     * @param Dossier $courrier_classer
+     * @Route("/{id}/voir", name="show_courrier_classed")
      * @return Response
      */
-    public function showClasser($id): Response
+    public function showClasser(Dossier $courrier_classer): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
         }
 
-        $courrier_classer = $this->courrierRepository->find($id);
+        // $courrier_classer = $this->courrierRepository->find($id);
 
         /*$courrier_classer->setIsRead(true);
         $this->em->persist($courrier_classer);

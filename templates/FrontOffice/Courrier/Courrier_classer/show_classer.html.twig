@@ -26,37 +26,41 @@
             <div class="col-sm-4">
                 <div class="mb-2">
                     <span class="font-weight-bold">Recepteur :</span>
-                    <span>{{ courrier_classer.recipient is defined ? courrier_classer.recipient.email : "" }}</span>
+                    <span>{{ courrier_classer.courrier is defined ? courrier_classer.courrier.recipient.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Emetteur :</span>
-                    <span>{{ courrier_classer.sender is defined ? courrier_classer.sender.email : "" }}</span>
+                    <span>{{ courrier_classer.courrier is defined ? courrier_classer.courrier.sender.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Objet :</span>
-                    <span>{{ courrier_classer.objetCourrier is defined ? courrier_classer.objetCourrier : "" }}</span>
+                    <span>{{ courrier_classer.courrier is defined ? courrier_classer.courrier.objetCourrier : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Date d'envoi :</span>
                     <span>
-                        {{ courrier_classer.dateEnvoie is defined ? courrier_classer.dateEnvoie|date('d/m/Y') : "" }} à
-                        {{ courrier_classer.dateEnvoie is defined ? courrier_classer.dateEnvoie|date('H:i') : "" }}
+                        {{ courrier_classer.courrier is defined ? courrier_classer.courrier.dateEnvoie|date('d/m/Y') : "" }} à
+                        {{ courrier_classer.courrier is defined ? courrier_classer.courrier.dateEnvoie|date('H:i') : "" }}
                     </span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
-                    <span>{{ courrier_classer.typeCourrier is defined ? courrier_classer.typeCourrier.libelleTypeCourrier }}</span>
+                    <span>{{ courrier_classer.courrier is defined ? courrier_classer.courrier.typeCourrier.libelleTypeCourrier }}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold">Type du dossier :</span>
+                    <span>{{ courrier_classer.typDos is defined ? courrier_classer.typDos.libelleTypeDossier }}</span>
                 </div>
                 {% if courrier_classer.fichier is defined %}
-                    <div class="mb-2 {{ courrier_classer.fichier is null ? 'd-none' : '' }}">
+                    <div class="mb-2 {{ courrier_classer.courrier.fichier is null ? 'd-none' : '' }}">
                         <span class="font-weight-bold">
-                            <a href="{{ asset('uploads/courriers/' ~ courrier_classer.fichier ) }}">Voir le courrier</a>
+                            <a href="{{ asset('uploads/courriers/' ~ courrier_classer.courrier.fichier ) }}">Voir le courrier</a>
                         </span>
                     </div>
                 {% endif %}
                 <div class="mt-4 mb-2">
                     <span class="font-weight-bold">Message :</span>
-                    <span>{{ courrier_classer.message is defined ? courrier_classer.message|raw }}</span>
+                    <span>{{ courrier_classer.courrier is defined ? courrier_classer.courrier.message|raw }}</span>
                 </div>
             </div>
         </div>
