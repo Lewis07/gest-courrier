@@ -159,10 +159,10 @@ class CourrierController extends AbstractController
 
     /**
      * Voir la courrier envoyé
-     * @Route("/courrier-envoye/voir", name="courrier_sent_show")
+     * @Route("/{id}/courrier-envoye/voir", name="courrier_sent_show")
      * @return Response
      */
-    public function showSent(): Response
+    public function showSent($id): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
@@ -171,7 +171,7 @@ class CourrierController extends AbstractController
         $user_id = $this->getUser()->getId();
 
         if (!empty($user_id)){
-            $sent_courrier = $this->courrierRepository->findOneBy(['sender' => $user_id]);
+            $sent_courrier = $this->courrierRepository->findOneBy(['sender' => $user_id, 'id' => $id]);
         }
 
         $sent_courrier->setIsRead(true);
