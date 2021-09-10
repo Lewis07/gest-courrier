@@ -66,4 +66,31 @@ class CourrierClasserController extends AbstractController
         $manager->flush();
         return $this->redirectToRoute('courrier_classer');
     }
+
+        /**
+     * Voir les courrier classer
+     * @Route("/courrier-classer/voir", name="show_courrier_classed")
+     * @return Response
+     */
+    public function showClasser(): Response
+    {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('app_login');
+        }
+
+        $user_id = $this->getUser()->getId();
+
+        if (!empty($user_id)){
+            $courrier_classers = $this->courrierRepository->findOneBy(['recipient' => $user_id]);
+
+        }
+
+        $courrier_classers->setIsRead(true);
+        $this->em->persist($archived_courrier);
+        $this->em->flush();
+
+        return $this->render('FrontOffice/Courrier/courrier_classer/show_classer.html.twig',
+                                compact('courrier_classer')
+        );
+    }
 }
