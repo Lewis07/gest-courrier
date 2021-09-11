@@ -30,12 +30,12 @@ class Departement
     private $nomDepartement;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="departement")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="departement", cascade={"persist", "remove"})
      */
     private $users;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Direction::class, inversedBy="departements")
+     * @ORM\ManyToOne(targetEntity=Direction::class, inversedBy="departements", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $direction;

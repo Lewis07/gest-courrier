@@ -30,7 +30,7 @@ class Fonction
     private $nomFonction;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="fonction")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="fonction", cascade={"persist", "remove"})
      */
     private $users;
 

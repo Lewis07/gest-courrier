@@ -35,7 +35,7 @@
                         {% for archived_courrier in archived_courriers %}
                         {% set priorite = archived_courrier.courrier.priorite %}
                             <tr>
-                                <td>{{ archived_courrier.user.username }}</td>
+                                <td>{{ archived_courrier.user.nom }}</td>
                                 <td>{{ archived_courrier.courrier.reference }}</td>
                                 <td class="{{ archived_courrier.courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                     {{ archived_courrier.courrier.objetCourrier }}

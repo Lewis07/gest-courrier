@@ -66,12 +66,12 @@ class User implements UserInterface
     Public $confirm_password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Courrier::class, mappedBy="sender", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Courrier::class, mappedBy="sender", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $sent;
                                                                                         
     /**
-     * @ORM\OneToMany(targetEntity=Courrier::class, mappedBy="recipient", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Courrier::class, mappedBy="recipient", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $received;
     
@@ -81,17 +81,17 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=PartageCourrier::class, mappedBy="sharer")
+     * @ORM\OneToMany(targetEntity=PartageCourrier::class, mappedBy="sharer", cascade={"persist", "remove"})
      */
     private $partageur;
 
     /**
-     * @ORM\ManyToMany(targetEntity=PartageCourrier::class, mappedBy="sharer")
+     * @ORM\ManyToMany(targetEntity=PartageCourrier::class, mappedBy="sharer", cascade={"persist", "remove"})
      */
     private $partageCourriers;
 
     /**
-     * @ORM\OneToMany(targetEntity=PartageCourrier::class, mappedBy="sender")
+     * @ORM\OneToMany(targetEntity=PartageCourrier::class, mappedBy="sender", cascade={"persist", "remove"})
      */
     private $envoyeur;
 
@@ -101,18 +101,18 @@ class User implements UserInterface
     private $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=CourrierArchive::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=CourrierArchive::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $courrierArchives;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Fonction::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Fonction::class, inversedBy="users", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $fonction;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="users", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $departement;

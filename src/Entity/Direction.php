@@ -25,7 +25,7 @@ class Direction
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=70)
+     * @ORM\Column(type="string", length=70, nullable=true)
      * @Assert\Length(min=2,minMessage="Le nom de la direction est au minimum 2 caractères",max=70,
      *                      maxMessage="Le nom de la direction est au minimum 70 caractères")
      * @Assert\NotBlank(message="Le nom de la direction est obligatoire")

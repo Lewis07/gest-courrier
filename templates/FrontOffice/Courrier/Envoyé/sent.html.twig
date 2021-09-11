@@ -36,7 +36,7 @@
                     {% for sent_courrier in sent_courriers %}
                         {% set priorite = sent_courrier.priorite %}
                         <tr>
-                            <td>{{ sent_courrier.recipient.username }}</td>
+                            <td>{{ sent_courrier.recipient.nom }}</td>
                             <td>{{ sent_courrier.reference }}</td>
                             <td class="{{ sent_courrier.isRead == 0 ? 'font-weight-bold' : '' }}">
                                 {{ sent_courrier.objetCourrier }}

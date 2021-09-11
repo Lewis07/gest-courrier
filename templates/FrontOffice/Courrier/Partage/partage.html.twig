@@ -34,7 +34,7 @@
                     {% for partage_courrier in partage_courriers %}
                         {% set partage_courrier_priorite = partage_courrier.priorite  %}
                         <tr>
-                            <td>{{ partage_courrier.recipient.username }}</td>
+                            <td>{{ partage_courrier.recipient.nom }}</td>
                             <td>{{ partage_courrier.reference }}</td>
                             <td>{{ partage_courrier.objetCourrier }}</td>
                             <td>

@@ -50,13 +50,13 @@ class Courrier
     private $isRead = 0;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sent")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sent", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;
     
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="received")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="received", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $recipient;
