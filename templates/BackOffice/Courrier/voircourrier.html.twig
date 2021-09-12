@@ -1,5 +1,5 @@
 {% extends "base_admin.html.twig" %}
-{% block title %}{{ parent() }} Détail du courrier {% endblock %}
+{% block title %}{{ parent() }} Détail du courrier{% endblock %}
 
 {% block body %}
     {% include 'partials/header.html.twig' %}
@@ -25,38 +25,38 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="mb-2">
-                    <span class="font-weight-bold">Recepteur :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.recipient.email : "" }}</span>
+                    <span class="font-weight-bold">Envoyeur :</span>
+                    <span>{{ courrier is defined ? courrier.sender.email : "" }}</span>
                 </div>
                 <div class="mb-2">
-                    <span class="font-weight-bold">Emetteur :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.sender.email : "" }}</span>
+                    <span class="font-weight-bold">Recepteur :</span>
+                    <span>{{ courrier is defined ? courrier.recipient.email : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Objet :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.objetCourrier : "" }}</span>
+                    <span>{{ courrier is defined ? courrier.objetCourrier : "" }}</span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Date d'envoi :</span>
                     <span>
-                        {{ received_courrier is defined ? received_courrier.dateEnvoie|date('d/m/Y') : "" }} à
-                        {{ received_courrier is defined ? received_courrier.dateEnvoie|date('H:i') : "" }}
+                        {{ courrier is defined ? courrier.dateEnvoie|date('d/m/Y') : "" }} à
+                        {{ courrier is defined ? courrier.dateEnvoie|date('H:i') : "" }}
                     </span>
                 </div>
                 <div class="mb-2">
                     <span class="font-weight-bold">Type du courrier :</span>
-                    <span>{{ received_courrier.typeCourrier is defined ? received_courrier.typeCourrier.libelleTypeCourrier }}</span>
+                    <span>{{ courrier.typeCourrier is defined ? courrier.typeCourrier.libelleTypeCourrier }}</span>
                 </div>
+                {% if courrier.fichier is defined %}
+                    <div class="mb-2 {{ courrier.fichier is null ? 'd-none' : '' }}">
+                        <span class="font-weight-bold">
+                            <a href="{{ asset('uploads/courriers/' ~ courrier.fichier ) }}">Voir le courrier</a>
+                        </span>
+                    </div>
+                {% endif %}
                 <div class="mt-4">
                     <span class="font-weight-bold">Message :</span>
-                    <span>{{ received_courrier is defined ? received_courrier.message|raw }}</span>
-                    {% if received_courrier.fichier is defined %}
-                        <div class="mb-2 {{ received_courrier.fichier is null ? 'd-none' : '' }}">
-                            <span class="font-weight-bold">
-                                <a href="{{ asset('uploads/courriers/' ~ received_courrier.fichier ) }}">Voir le courrier</a>
-                            </span>
-                        </div>
-                    {% endif %}
+                    <span>{{ courrier is defined ? courrier.message|raw }}</span>
                 </div>
             </div>
         </div>

@@ -20,12 +20,12 @@ class PartageCourrier
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="partageCourriers")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="partageCourriers", cascade={"persist", "remove"})
      */
     private $sharer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="envoyeur")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="envoyeur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;

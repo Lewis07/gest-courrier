@@ -36,8 +36,8 @@
                        {% for courrier in courriers %}
                         {% set priorite = courrier.priorite %}
                         <tr>
-                            <td>{{ courrier.sender.username }}</td>
-                            <td>{{ courrier.recipient.username }}</td>
+                            <td>{{ courrier.sender.nom }}</td>
+                            <td>{{ courrier.recipient.nom }}</td>
                             <td>{{ courrier.objetCourrier }}</td>
                             <td>{{ courrier.dateEnvoie|date('d-m-Y') }}</td>
                             <td>
@@ -50,9 +50,10 @@
                                 {% endif %}
                             </td>
                             <td>
-                                    <a href="#" class="px-1">
+                                    <a href="{{ path('show_courriers',{id:courrier.id}) }}" class="px-1">
                                             <i class="fas fa-eye"></i>
                                         </a>
+                                        {# <a href="{{ path('delete_courrier',{id:courrier.id}) }}" #}
                                         <a href="#"
                                            onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
                                             <i class="fas fa-trash text-danger"></i>

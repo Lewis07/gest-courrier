@@ -18,7 +18,7 @@ class CourrierArchive
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="courrierArchives")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="courrierArchives", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

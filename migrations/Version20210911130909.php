@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210907125242 extends AbstractMigration
+final class Version20210911130909 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20210907125242 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE courrier ADD is_shared TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE direction CHANGE nom_direction nom_direction VARCHAR(70) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE courrier DROP is_shared');
+        $this->addSql('ALTER TABLE direction CHANGE nom_direction nom_direction VARCHAR(70) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }
