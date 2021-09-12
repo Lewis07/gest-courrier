@@ -73,7 +73,7 @@ class CourrierController extends AbstractController
 
             $_courrier_saved_id = $courrier->getId();
             $update_ref_courrier = $this->courrierRepository->find($_courrier_saved_id);
-            $reference = "CR".$_courrier_saved_id;
+            $reference = "COUR_F".$_courrier_saved_id;
             $update_ref_courrier->setReference($reference);
             $this->em->persist($update_ref_courrier);
             $this->em->flush();

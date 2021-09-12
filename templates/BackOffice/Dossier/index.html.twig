@@ -30,7 +30,22 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                        {% for dossier in dossiers %}
+                        <tr>
+                            <td>{{ dossier.courrier.reference }}</td>
+                            <td>{{ dossier.typDos.libelleTypeDossier }}</td>
+                            <td>
+                                    <a href="#" class="px-1">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {# <a href="{{ path('delete_courrier',{id:courrier.id}) }}" #}
+                                        <a href="#"
+                                           onclick="return confirm('Est-ce que vous voulez vraiment supprimer cet element');">
+                                            <i class="fas fa-trash text-danger"></i>
+                                        </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
