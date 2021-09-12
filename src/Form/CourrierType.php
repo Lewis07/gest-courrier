@@ -23,6 +23,7 @@ class CourrierType extends AbstractType
             // ->add('DateEnvoie')
             ->add('recipient', EntityType::class, [
                 "class" => User::class,
+                'label' => 'Récepteur ',
                 "choice_label" => "email",
             ])
             ->add('priorite', ChoiceType::class, [
