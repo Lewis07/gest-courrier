@@ -47,6 +47,13 @@
                     <span class="font-weight-bold">Type du courrier :</span>
                     <span>{{ archived_courrier.typeCourrier is defined ? archived_courrier.typeCourrier.libelleTypeCourrier }}</span>
                 </div>
+                {% if received_courrier.fichier is defined %}
+                    <div class="mb-2 {{ received_courrier.fichier is null ? 'd-none' : '' }}">
+                        <span class="font-weight-bold">
+                            <a href="{{ asset('uploads/courriers/' ~ received_courrier.fichier ) }}">Voir le courrier</a>
+                        </span>
+                    </div>
+                {% endif %}
                 <div class="mt-4">
                     <span class="font-weight-bold">Message :</span>
                     <span>{{ archived_courrier is defined ? archived_courrier.message|raw }}</span>

@@ -33,7 +33,7 @@ class Direction
     private $nomDirection;
 
     /**
-     * @ORM\Column(type="string", length=80)
+     * @ORM\Column(type="string", length=80 )
      * @Assert\Length(min=2,minMessage="La description est au minimum 2 caractères",max=80,
      *                      maxMessage="La description est au minimum 80 caractères")
      * @Assert\NotBlank(message="La description est obligatoire")
