@@ -13,7 +13,7 @@
 {#                <h6>Mettez un photo...</h6>#}
 {#                <input type="file" class="text-center center-block file-upload">#}
                 {% if app.user.picture != NULL %}
-                    <img src="{{ asset( upload_images_users_directory ~ '/' ~ app.user.picture) }}"
+                    <img src="{{ asset(uploads/images/users/' ~ app.user.picture) }}"
                          alt="picture teacher" class="rounded-circle thumb-xs">
                 {% else %}
                     <img src="{{ asset('img/no-image.png') }}" alt="No image" class="avatar">

@@ -41,9 +41,9 @@
                                 {{ trashe.dateEnvoie|date('d/m/Y') }}
                             </td>
                             <td>
-{#                                <a href="{{ path('courrier_received_show',{id:received_courrier.id})}}">#}
-{#                                    <i class="fas fa-eye"></i>#}
-{#                                </a>#}
+                            <a href="#">
+                                <i class="fas fa-eye"></i>
+                            </a>
                                 <a href="{{ path('courrier_delete',{id:trashe.id})}}"
                                    onclick="return confirm('Est-ce que vous voulez supprimer definitivement ce courrier');"
                                 >
